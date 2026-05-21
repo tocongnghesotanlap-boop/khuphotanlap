@@ -18,6 +18,12 @@
 body{
   background:#0B3D2E;
   min-height:100vh;
+}
+
+/* LOGIN */
+
+#loginPage{
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -36,20 +42,18 @@ body{
 
 .logo{
   width:180px;
-  max-width:80%;
   border-radius:35px;
 }
 
 .title{
   color:#F4C430;
   font-size:34px;
-  font-weight:700;
+  font-weight:bold;
   margin-top:18px;
 }
 
 .subtitle{
-  color:#fff;
-  font-size:18px;
+  color:white;
   margin-top:6px;
 }
 
@@ -57,8 +61,6 @@ body{
   background:white;
   border-radius:28px;
   padding:28px;
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.25);
 }
 
 .input{
@@ -70,52 +72,81 @@ body{
   margin-bottom:16px;
 }
 
-.input:focus{
-  outline:none;
-  border-color:#F4C430;
-}
-
 .btn{
   width:100%;
   border:none;
   background:#F4C430;
-  color:#000;
+  color:black;
   padding:18px;
   border-radius:20px;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
-  transition:.2s;
 }
 
-.btn:hover{
-  transform:scale(1.02);
+/* HOME */
+
+#homePage{
+  display:none;
+  min-height:100vh;
+  background:#f5f5f5;
 }
 
-.note{
+.topbar{
+  background:#0B3D2E;
+  padding:22px;
+  color:white;
+}
+
+.topbar h1{
+  color:#F4C430;
+  font-size:28px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding:20px;
+}
+
+.card-menu{
+  background:white;
+  border-radius:24px;
+  padding:28px;
   text-align:center;
-  color:#777;
-  margin-top:15px;
-  font-size:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+.icon{
+  font-size:42px;
+}
+
+.name{
+  margin-top:10px;
+  font-weight:bold;
+  color:#0B3D2E;
 }
 
 .footer{
-  text-align:center;
-  color:white;
-  margin-top:20px;
-  font-size:14px;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  display:flex;
+  justify-content:space-around;
+  padding:14px;
+  box-shadow:0 -2px 15px rgba(0,0,0,.1);
 }
 
-@media(max-width:480px){
+.footer-item{
+  text-align:center;
+  font-size:13px;
+}
 
-  .title{
-    font-size:28px;
-  }
-
-  .logo{
-    width:150px;
-  }
-
+.footer-item div:first-child{
+  font-size:22px;
 }
 
 </style>
@@ -123,53 +154,124 @@ body{
 
 <body>
 
+<!-- LOGIN -->
+
+<div id="loginPage">
+
 <div class="container">
 
-  <div class="header">
+<div class="header">
 
-      <img
-      src="logo.png"
-      class="logo"
-      alt="Logo">
+<img
+src="logo.png"
+class="logo">
 
-      <div class="title">
-          KHU PHỐ TÂN LẬP
-      </div>
+<div class="title">
+KHU PHỐ TÂN LẬP
+</div>
 
-      <div class="subtitle">
-          Quản lý địa bàn số
-      </div>
+<div class="subtitle">
+Quản lý địa bàn số
+</div>
 
-  </div>
+</div>
 
-  <div class="card">
+<div class="card">
 
-      <input
-      id="username"
-      class="input"
-      placeholder="Tài khoản">
+<input
+id="username"
+class="input"
+placeholder="Tài khoản">
 
-      <input
-      id="password"
-      class="input"
-      type="password"
-      placeholder="Mật khẩu">
+<input
+id="password"
+class="input"
+type="password"
+placeholder="Mật khẩu">
 
-      <button
-      class="btn"
-      onclick="login()">
-          ĐĂNG NHẬP
-      </button>
+<button
+class="btn"
+onclick="login()">
 
-      <div class="note">
-          Demo: admin / 123456
-      </div>
+ĐĂNG NHẬP
 
-  </div>
+</button>
 
-  <div class="footer">
-      Ban điều hành Khu phố Tân Lập
-  </div>
+</div>
+
+</div>
+
+</div>
+
+<!-- HOME -->
+
+<div id="homePage">
+
+<div class="topbar">
+
+<h1>KHU PHỐ TÂN LẬP</h1>
+
+<p>Quản lý địa bàn số</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card-menu">
+<div class="icon">📊</div>
+<div class="name">Tổng quan</div>
+</div>
+
+<div class="card-menu">
+<div class="icon">🏘️</div>
+<div class="name">Tổ NDTQ</div>
+</div>
+
+<div class="card-menu">
+<div class="icon">👥</div>
+<div class="name">Nhân khẩu</div>
+</div>
+
+<div class="card-menu">
+<div class="icon">🏪</div>
+<div class="name">Hộ kinh doanh</div>
+</div>
+
+<div class="card-menu">
+<div class="icon">🧑‍💼</div>
+<div class="name">Đảng viên</div>
+</div>
+
+<div class="card-menu">
+<div class="icon">⚠️</div>
+<div class="name">Đối tượng</div>
+</div>
+
+</div>
+
+<div class="footer">
+
+<div class="footer-item">
+<div>🔍</div>
+<div>Tìm kiếm</div>
+</div>
+
+<div class="footer-item">
+<div>📈</div>
+<div>Thống kê</div>
+</div>
+
+<div class="footer-item">
+<div>📄</div>
+<div>Báo cáo</div>
+</div>
+
+<div class="footer-item">
+<div>👤</div>
+<div>Tài khoản</div>
+</div>
+
+</div>
 
 </div>
 
@@ -177,30 +279,38 @@ body{
 
 function login(){
 
-  const user =
-    document.getElementById(
-      "username"
-    ).value
+const user =
+document.getElementById(
+"username"
+).value
 
-  const pass =
-    document.getElementById(
-      "password"
-    ).value
+const pass =
+document.getElementById(
+"password"
+).value
 
-  if(
-    user === "admin"
-    &&
-    pass === "123456"
-  ){
+if(
+user === "admin"
+&&
+pass === "123456"
+){
 
-    alert("Đăng nhập thành công 😎")
+document.getElementById(
+"loginPage"
+).style.display = "none"
 
-  }else{
+document.getElementById(
+"homePage"
+).style.display = "block"
 
-    alert(
-      "Sai tài khoản hoặc mật khẩu"
-    )
-  }
+}else{
+
+alert(
+"Sai tài khoản hoặc mật khẩu"
+)
+
+}
+
 }
 
 </script>
