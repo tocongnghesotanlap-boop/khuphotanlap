@@ -272,9 +272,18 @@ onclick="openToNDTQ()">
 <div class="name">Hộ kinh doanh</div>
 </div>
 
-<div class="card-menu">
-<div class="icon">🧑‍💼</div>
-<div class="name">Đảng viên</div>
+<div
+class="card-menu"
+onclick="openDangVien()">
+
+<div class="icon">
+🧑‍💼
+</div>
+
+<div class="name">
+Đảng viên
+</div>
+
 </div>
 
 <div class="card-menu">
@@ -351,7 +360,111 @@ onclick="openToNDTQ()">
 </div>
 
 </div>
+<!-- DANG VIEN PAGE -->
 
+<div id="dangVienPage" class="page">
+
+<div class="topbar">
+
+<h1>
+CHI BỘ TÂN LẬP
+</h1>
+
+<p>
+Tổng quan đảng viên
+</p>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+👥
+
+<div>
+Tổng Đảng viên
+</div>
+
+<div
+id="tongDangVien"
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+🧑‍💼
+
+<div>
+Ban Chi ủy
+</div>
+
+<div
+id="banChiUy"
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+🟢
+
+<div>
+Chính thức
+</div>
+
+<div
+id="dangVienChinhThuc"
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+<div class="stat-card">
+
+🟡
+
+<div>
+Miễn sinh hoạt
+</div>
+
+<div
+id="mienSinhHoat"
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="big-card"
+onclick="openDanhSachDangVien()">
+
+📋
+
+<h3>
+Xem danh sách đảng viên
+</h3>
+
+</div>
+
+</div>
 <!-- FOOTER -->
 
 <div class="footer">
@@ -592,7 +705,122 @@ showPage(
 )
 
 }
+const dangVienCsv =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1024784158&single=true&output=csv"
 
+let dsDangVien = []
+
+async function openDangVien(){
+
+showPage(
+"dangVienPage"
+)
+
+if(dsDangVien.length > 0){
+return
+}
+
+const res =
+await fetch(
+dangVienCsv
+)
+
+const csv =
+await res.text()
+
+const rows =
+csv.split("\n")
+.slice(1)
+
+rows.forEach(row=>{
+
+const cols =
+row.split(",")
+
+if(cols.length < 17)
+return
+
+dsDangVien.push({
+
+hoTen:
+cols[2]?.trim(),
+
+mienSinhHoat:
+cols[12]?.trim(),
+
+huyHieuDang:
+cols[11]?.trim(),
+
+chucVuDang:
+cols[16]?.trim()
+
+})
+
+})
+
+renderThongKeDangVien()
+
+}
+
+function renderThongKeDangVien(){
+
+document.getElementById(
+"tongDangVien"
+).innerText =
+dsDangVien.length
+
+const banChiUy =
+dsDangVien.filter(dv=>
+
+dv.chucVuDang ===
+"Bí thư"
+
+||
+
+dv.chucVuDang ===
+"Phó Bí thư"
+
+||
+
+dv.chucVuDang ===
+"Chi ủy viên"
+
+).length
+
+document.getElementById(
+"banChiUy"
+).innerText =
+banChiUy
+
+const mienSinhHoat =
+dsDangVien.filter(dv=>
+
+dv.mienSinhHoat ===
+"Có"
+
+).length
+
+document.getElementById(
+"mienSinhHoat"
+).innerText =
+mienSinhHoat
+
+document.getElementById(
+"dangVienChinhThuc"
+).innerText =
+dsDangVien.length
+-
+mienSinhHoat
+
+}
+
+function openDanhSachDangVien(){
+
+alert(
+"Đang làm danh sách ảnh 😎"
+)
+
+}
 </script>
 
 </body>
