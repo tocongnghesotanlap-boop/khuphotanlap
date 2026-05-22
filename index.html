@@ -910,22 +910,28 @@ document.getElementById(
 dsDangVien.length
 
 const banChiUy =
-dsDangVien.filter(dv=>
+dsDangVien.filter(dv=>{
 
-dv.chucVuDang ===
-"Bí thư"
+const role =
+dv.chucVuDang
+.toLowerCase()
+.trim()
+
+return (
+
+role.includes("bí thư")
 
 ||
 
-dv.chucVuDang ===
-"Phó Bí thư"
+role.includes("phó")
 
 ||
 
-dv.chucVuDang ===
-"Chi ủy viên"
+role.includes("chi")
 
-).length
+)
+
+}).length
 
 document.getElementById(
 "banChiUy"
