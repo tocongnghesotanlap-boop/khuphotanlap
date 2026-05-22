@@ -938,6 +938,15 @@ dv.hoTen !== ""
 
 ).length
 
+const tongDangVien =
+dsDangVien.filter(dv=>
+
+dv.hoTen &&
+dv.hoTen.length > 4 &&
+isNaN(dv.hoTen)
+
+).length
+
 document.getElementById(
 "tongDangVien"
 ).innerText =
