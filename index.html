@@ -61,6 +61,7 @@ body{
   background:white;
   border-radius:28px;
   padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
 }
 
 .input{
@@ -86,7 +87,9 @@ body{
 
 /* HOME */
 
-#homePage{
+#homePage,
+#toPage,
+#detailPage{
   display:none;
   min-height:100vh;
   background:#f5f5f5;
@@ -116,6 +119,7 @@ body{
   padding:28px;
   text-align:center;
   box-shadow:0 6px 20px rgba(0,0,0,.08);
+  cursor:pointer;
 }
 
 .icon{
@@ -149,6 +153,16 @@ body{
   font-size:22px;
 }
 
+.back-btn{
+  background:#F4C430;
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  margin-bottom:15px;
+  cursor:pointer;
+}
+
 </style>
 </head>
 
@@ -162,9 +176,7 @@ body{
 
 <div class="header">
 
-<img
-src="logo.png"
-class="logo">
+<img src="logo.png" class="logo">
 
 <div class="title">
 KHU PHỐ TÂN LẬP
@@ -256,168 +268,24 @@ Tổ NDTQ
 
 </div>
 
-<div class="footer">
-
-<div class="footer-item">
-<div>🔍</div>
-<div>Tìm kiếm</div>
 </div>
 
-<div class="footer-item">
-<div>📈</div>
-<div>Thống kê</div>
-</div>
+<!-- TO NDTQ -->
 
-<div class="footer-item">
-<div>📄</div>
-<div>Báo cáo</div>
-</div>
-
-<div class="footer-item">
-<div>👤</div>
-<div>Tài khoản</div>
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-function login(){
-
-const user =
-document.getElementById(
-"username"
-).value
-
-const pass =
-document.getElementById(
-"password"
-).value
-
-if(
-user === "admin"
-&&
-pass === "123456"
-){
-
-document.getElementById(
-"loginPage"
-).style.display = "none"
-
-document.getElementById(
-"homePage"
-).style.display = "block"
-
-}else{
-
-alert(
-"Sai tài khoản hoặc mật khẩu"
-)
-
-}
-
-}
-function openToNDTQ(){
-
-document.getElementById(
-"homePage"
-).style.display = "none"
-
-document.getElementById(
-"toPage"
-).style.display = "block"
-
-}
-
-
-function openToDetail(
-ten,
-dientich,
-soho,
-totruong,
-sdttruong,
-topho,
-sdtpho
-){
-
-document.getElementById(
-"toPage"
-).style.display = "none"
-
-document.getElementById(
-"detailPage"
-).style.display = "block"
-
-document.getElementById(
-"tenTo"
-).innerText = ten
-
-document.getElementById(
-"dienTich"
-).innerText =
-dientich
-
-document.getElementById(
-"soHo"
-).innerText =
-soho
-
-document.getElementById(
-"toTruong"
-).innerText =
-totruong
-
-document.getElementById(
-"sdtTruong"
-).innerText =
-sdttruong
-
-document.getElementById(
-"toPho"
-).innerText =
-topho
-
-document.getElementById(
-"sdtPho"
-).innerText =
-sdtpho
-
-}
-</script>
-<!-- TO NDTQ PAGE -->
-
-<div
-id="toPage"
-style="
-display:none;
-min-height:100vh;
-background:#f5f5f5;
-">
+<div id="toPage">
 
 <div class="topbar">
 <h1>TỔ NDTQ</h1>
 <p>Quản lý tổ nhân dân tự quản</p>
 </div>
 
-<div
-id="toContainer"
-class="grid">
-</div>
+<div id="toContainer" class="grid"></div>
 
 </div>
 
+<!-- DETAIL -->
 
-<!-- CHI TIET TO -->
-
-<div
-id="detailPage"
-style="
-display:none;
-min-height:100vh;
-background:#f5f5f5;
-">
+<div id="detailPage">
 
 <div class="topbar">
 
@@ -428,6 +296,14 @@ background:#f5f5f5;
 </div>
 
 <div style="padding:20px;">
+
+<button
+class="back-btn"
+onclick="backToTo()">
+
+← Quay lại
+
+</button>
 
 <div class="card">
 
@@ -468,71 +344,218 @@ background:#f5f5f5;
 </div>
 
 </div>
+
+<script>
+
+document.getElementById(
+"loginPage"
+).style.display = "flex"
+
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
+
+let dsTo = []
+
+function login(){
+
+const user =
+document.getElementById(
+"username"
+).value
+
+const pass =
+document.getElementById(
+"password"
+).value
+
+if(
+user === "admin"
+&&
+pass === "123456"
+){
+
+document.getElementById(
+"loginPage"
+).style.display =
+"none"
+
+document.getElementById(
+"homePage"
+).style.display =
+"block"
+
+}else{
+
+alert(
+"Sai tài khoản hoặc mật khẩu"
+)
+
+}
+
+}
+
+async function openToNDTQ(){
+
+document.getElementById(
+"homePage"
+).style.display =
+"none"
+
+document.getElementById(
+"toPage"
+).style.display =
+"block"
+
+if(dsTo.length > 0){
+return
+}
+
+const res =
+await fetch(csvUrl)
+
+const csv =
+await res.text()
+
+const rows =
+csv.split("\n").slice(1)
+
+rows.forEach(row=>{
+
+const cols =
+row.split(",")
+
+if(cols.length < 8)return
+
+dsTo.push({
+
+tenTo:
+cols[1]?.trim(),
+
+dienTich:
+cols[2]?.trim(),
+
+soHo:
+cols[3]?.trim(),
+
+toTruong:
+cols[4]?.trim(),
+
+sdtToTruong:
+cols[5]?.trim(),
+
+toPho:
+cols[7]?.trim(),
+
+sdtToPho:
+cols[8]?.trim()
+
+})
+
+})
+
+renderTo()
+
+}
+
+function renderTo(){
+
+const container =
+document.getElementById(
+"toContainer"
+)
+
+container.innerHTML = ""
+
+dsTo.forEach(to=>{
+
+container.innerHTML += `
+
 <div
-id="detailPage"
-style="
-display:none;
-min-height:100vh;
-background:#f5f5f5;
-">
+class="card-menu"
+onclick='openToDetail(
+${JSON.stringify(to)}
+)'>
 
-<div class="topbar">
-
-<h1 id="tenTo"></h1>
-
-<p>
-Thông tin tổ
-</p>
-
+<div class="icon">
+🏘️
 </div>
 
-<div
-style="
-padding:20px;
-">
-
-<div class="card">
-
-<p>
-<b>Diện tích:</b>
-<span id="dienTich"></span>
-</p>
-
-<br>
-
-<p>
-<b>Số hộ:</b>
-<span id="soHo"></span>
-</p>
-
-<br>
-
-<p>
-<b>Tổ trưởng:</b>
-<span id="toTruong"></span>
-</p>
-
-<p>
-📞
-<span id="sdtTruong"></span>
-</p>
-
-<br>
-
-<p>
-<b>Tổ phó:</b>
-<span id="toPho"></span>
-</p>
-
-<p>
-📞
-<span id="sdtPho"></span>
-</p>
-
+<div class="name">
+${to.tenTo}
 </div>
 
 </div>
 
-</div>
+`
+
+})
+
+}
+
+function openToDetail(to){
+
+document.getElementById(
+"toPage"
+).style.display =
+"none"
+
+document.getElementById(
+"detailPage"
+).style.display =
+"block"
+
+document.getElementById(
+"tenTo"
+).innerText =
+to.tenTo
+
+document.getElementById(
+"dienTich"
+).innerText =
+to.dienTich
+
+document.getElementById(
+"soHo"
+).innerText =
+to.soHo
+
+document.getElementById(
+"toTruong"
+).innerText =
+to.toTruong
+
+document.getElementById(
+"sdtTruong"
+).innerText =
+to.sdtToTruong
+
+document.getElementById(
+"toPho"
+).innerText =
+to.toPho
+
+document.getElementById(
+"sdtPho"
+).innerText =
+to.sdtToPho
+
+}
+
+function backToTo(){
+
+document.getElementById(
+"detailPage"
+).style.display =
+"none"
+
+document.getElementById(
+"toPage"
+).style.display =
+"block"
+
+}
+
+</script>
+
 </body>
 </html>
