@@ -222,9 +222,16 @@ onclick="login()">
 <div class="name">Tổng quan</div>
 </div>
 
-<div class="card-menu">
+<div
+class="card-menu"
+onclick="openToNDTQ()">
+
 <div class="icon">🏘️</div>
-<div class="name">Tổ NDTQ</div>
+
+<div class="name">
+Tổ NDTQ
+</div>
+
 </div>
 
 <div class="card-menu">
@@ -312,8 +319,211 @@ alert(
 }
 
 }
+function openToNDTQ(){
 
+document.getElementById(
+"homePage"
+).style.display = "none"
+
+document.getElementById(
+"toPage"
+).style.display = "block"
+
+}
+
+
+function openToDetail(
+ten,
+dientich,
+soho,
+totruong,
+sdttruong,
+topho,
+sdtpho
+){
+
+document.getElementById(
+"toPage"
+).style.display = "none"
+
+document.getElementById(
+"detailPage"
+).style.display = "block"
+
+document.getElementById(
+"tenTo"
+).innerText = ten
+
+document.getElementById(
+"dienTich"
+).innerText =
+dientich
+
+document.getElementById(
+"soHo"
+).innerText =
+soho
+
+document.getElementById(
+"toTruong"
+).innerText =
+totruong
+
+document.getElementById(
+"sdtTruong"
+).innerText =
+sdttruong
+
+document.getElementById(
+"toPho"
+).innerText =
+topho
+
+document.getElementById(
+"sdtPho"
+).innerText =
+sdtpho
+
+}
 </script>
+<!-- TO NDTQ PAGE -->
 
+<div
+id="toPage"
+style="
+display:none;
+min-height:100vh;
+background:#f5f5f5;
+">
+
+<div class="topbar">
+
+<h1>TỔ NDTQ</h1>
+
+<p>
+Quản lý tổ nhân dân tự quản
+</p>
+
+</div>
+
+<div class="grid">
+
+<div
+class="card-menu"
+onclick="openToDetail(
+'Tổ 1',
+'2.1 ha',
+'125',
+'Nguyễn Văn A',
+'0909123456',
+'Trần Văn B',
+'0909888888'
+)">
+
+<div class="icon">
+🏘️
+</div>
+
+<div class="name">
+Tổ 1
+</div>
+
+</div>
+
+<div
+class="card-menu"
+onclick="openToDetail(
+'Tổ 2',
+'1.8 ha',
+'98',
+'Lê Văn C',
+'0909555555',
+'Nguyễn Văn D',
+'0909666666'
+)">
+
+<div class="icon">
+🏘️
+</div>
+
+<div class="name">
+Tổ 2
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DETAIL -->
+
+<div
+id="detailPage"
+style="
+display:none;
+min-height:100vh;
+background:#f5f5f5;
+">
+
+<div class="topbar">
+
+<h1 id="tenTo"></h1>
+
+<p>
+Thông tin tổ
+</p>
+
+</div>
+
+<div
+style="
+padding:20px;
+">
+
+<div class="card">
+
+<p>
+<b>Diện tích:</b>
+<span id="dienTich"></span>
+</p>
+
+<br>
+
+<p>
+<b>Số hộ:</b>
+<span id="soHo"></span>
+</p>
+
+<br>
+
+<p>
+<b>Tổ trưởng:</b>
+<span id="toTruong"></span>
+</p>
+
+<p>
+📞
+<span id="sdtTruong"></span>
+</p>
+
+<br>
+
+<p>
+<b>Tổ phó:</b>
+<span id="toPho"></span>
+</p>
+
+<p>
+📞
+<span id="sdtPho"></span>
+</p>
+
+</div>
+
+</div>
+
+</div>
 </body>
 </html>
