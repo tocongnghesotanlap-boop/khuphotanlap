@@ -397,68 +397,77 @@ background:#f5f5f5;
 ">
 
 <div class="topbar">
-
 <h1>TỔ NDTQ</h1>
+<p>Quản lý tổ nhân dân tự quản</p>
+</div>
+
+<div
+id="toContainer"
+class="grid">
+</div>
+
+</div>
+
+
+<!-- CHI TIET TO -->
+
+<div
+id="detailPage"
+style="
+display:none;
+min-height:100vh;
+background:#f5f5f5;
+">
+
+<div class="topbar">
+
+<h1 id="tenTo"></h1>
+
+<p>Thông tin tổ</p>
+
+</div>
+
+<div style="padding:20px;">
+
+<div class="card">
+
+<p><b>Diện tích:</b>
+<span id="dienTich"></span>
+</p>
+
+<br>
+
+<p><b>Số hộ:</b>
+<span id="soHo"></span>
+</p>
+
+<br>
+
+<h3>Tổ trưởng</h3>
+
+<p id="toTruong"></p>
 
 <p>
-Quản lý tổ nhân dân tự quản
+📞
+<span id="sdtTruong"></span>
+</p>
+
+<br>
+
+<h3>Tổ phó</h3>
+
+<p id="toPho"></p>
+
+<p>
+📞
+<span id="sdtPho"></span>
 </p>
 
 </div>
 
-<div class="grid">
-
-<div
-class="card-menu"
-onclick="openToDetail(
-'Tổ 1',
-'2.1 ha',
-'125',
-'Nguyễn Văn A',
-'0909123456',
-'Trần Văn B',
-'0909888888'
-)">
-
-<div class="icon">
-🏘️
-</div>
-
-<div class="name">
-Tổ 1
 </div>
 
 </div>
-
-<div
-class="card-menu"
-onclick="openToDetail(
-'Tổ 2',
-'1.8 ha',
-'98',
-'Lê Văn C',
-'0909555555',
-'Nguyễn Văn D',
-'0909666666'
-)">
-
-<div class="icon">
-🏘️
-</div>
-
-<div class="name">
-Tổ 2
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- DETAIL -->
-
 <div
 id="detailPage"
 style="
