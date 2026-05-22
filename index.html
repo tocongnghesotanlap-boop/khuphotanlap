@@ -842,10 +842,16 @@ csv.split("\n")
 
 rows.forEach(row=>{
 
+if(!row.trim())
+return
+
 const cols =
 row.split(",")
 
-if(cols.length < 17)
+const hoTen =
+cols[2]?.trim()
+
+if(!hoTen)
 return
 
 dsDangVien.push({
@@ -904,10 +910,18 @@ renderThongKeDangVien()
 
 function renderThongKeDangVien(){
 
+const tongDangVien =
+dsDangVien.filter(dv=>
+
+dv.hoTen &&
+dv.hoTen !== ""
+
+).length
+
 document.getElementById(
 "tongDangVien"
 ).innerText =
-dsDangVien.length
+tongDangVien
 
 const banChiUy =
 dsDangVien.filter(dv=>{
