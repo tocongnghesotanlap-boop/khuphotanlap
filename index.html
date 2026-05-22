@@ -16,14 +16,14 @@
 }
 
 body{
-  background:#0B3D2E;
-  min-height:100vh;
+  background:#f5f5f5;
 }
 
 /* LOGIN */
 
 #loginPage{
   min-height:100vh;
+  background:#0B3D2E;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -41,8 +41,8 @@ body{
 }
 
 .logo{
-  width:180px;
-  border-radius:35px;
+  width:170px;
+  border-radius:30px;
 }
 
 .title{
@@ -54,14 +54,14 @@ body{
 
 .subtitle{
   color:white;
-  margin-top:6px;
+  margin-top:8px;
 }
 
 .card{
   background:white;
   border-radius:28px;
   padding:28px;
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
 }
 
 .input{
@@ -77,27 +77,25 @@ body{
   width:100%;
   border:none;
   background:#F4C430;
-  color:black;
+  color:#000;
   padding:18px;
-  border-radius:20px;
+  border-radius:18px;
   font-size:18px;
   font-weight:bold;
   cursor:pointer;
 }
 
-/* HOME */
+/* PAGE */
 
-#homePage,
-#toPage,
-#detailPage{
+.page{
   display:none;
   min-height:100vh;
-  background:#f5f5f5;
+  padding-bottom:90px;
 }
 
 .topbar{
   background:#0B3D2E;
-  padding:22px;
+  padding:24px;
   color:white;
 }
 
@@ -116,14 +114,18 @@ body{
 .card-menu{
   background:white;
   border-radius:24px;
-  padding:28px;
+  padding:26px;
   text-align:center;
-  box-shadow:0 6px 20px rgba(0,0,0,.08);
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
   cursor:pointer;
 }
 
+.card-menu:hover{
+  transform:scale(1.02);
+}
+
 .icon{
-  font-size:42px;
+  font-size:40px;
 }
 
 .name{
@@ -132,62 +134,58 @@ body{
   color:#0B3D2E;
 }
 
+.detail-card{
+  background:white;
+  margin:20px;
+  padding:24px;
+  border-radius:24px;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+}
+
+.info-item{
+  margin-bottom:14px;
+}
+
+/* FOOTER */
+
 .footer{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
+  height:76px;
   background:white;
   display:flex;
   justify-content:space-around;
-  padding:14px;
-  box-shadow:0 -2px 15px rgba(0,0,0,.1);
+  align-items:center;
+  box-shadow:0 -4px 18px rgba(0,0,0,.12);
+  border-top-left-radius:24px;
+  border-top-right-radius:24px;
 }
 
 .footer-item{
-  text-align:center;
-  font-size:13px;
-}
-
-.footer-item div:first-child{
-  font-size:22px;
-}
-
-.back-btn{
-   background:#F4C430;
-  border:none;
-  padding:12px 18px;
-  border-radius:14px;
-  font-weight:bold;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size:12px;
+  color:#777;
   cursor:pointer;
-  margin:15px 20px;
+}
+
+.footer-item div{
+  font-size:24px;
+  margin-bottom:3px;
+}
+
+.footer-item.active{
+  color:#0B3D2E;
+  font-weight:bold;
 }
 
 </style>
 </head>
 
 <body>
-  <button
-id="globalBackBtn"
-onclick="goBack()"
-style="
-display:none;
-position:fixed;
-top:15px;
-left:15px;
-z-index:9999;
-background:#F4C430;
-border:none;
-padding:12px 18px;
-border-radius:14px;
-font-weight:bold;
-box-shadow:0 4px 10px rgba(0,0,0,.2);
-cursor:pointer;
-">
-
-← Back
-
-</button>
 
 <!-- LOGIN -->
 
@@ -238,7 +236,7 @@ onclick="login()">
 
 <!-- HOME -->
 
-<div id="homePage">
+<div id="homePage" class="page">
 
 <div class="topbar">
 
@@ -260,10 +258,7 @@ class="card-menu"
 onclick="openToNDTQ()">
 
 <div class="icon">🏘️</div>
-
-<div class="name">
-Tổ NDTQ
-</div>
+<div class="name">Tổ NDTQ</div>
 
 </div>
 
@@ -293,22 +288,14 @@ Tổ NDTQ
 
 <!-- TO NDTQ -->
 
-<div id="toPage">
-  <div style="padding:15px;">
-
-<button
-class="back-btn"
-onclick="backHome()">
-
-← Trang chủ
-
-</button>
-
-</div>
+<div id="toPage" class="page">
 
 <div class="topbar">
+
 <h1>TỔ NDTQ</h1>
-<p>Quản lý tổ nhân dân tự quản</p>
+
+<p>13 tổ nhân dân tự quản</p>
+
 </div>
 
 <div id="toContainer" class="grid"></div>
@@ -317,7 +304,7 @@ onclick="backHome()">
 
 <!-- DETAIL -->
 
-<div id="detailPage">
+<div id="detailPage" class="page">
 
 <div class="topbar">
 
@@ -327,29 +314,19 @@ onclick="backHome()">
 
 </div>
 
-<div style="padding:20px;">
+<div class="detail-card">
 
-<button
-class="back-btn"
-onclick="backToTo()">
-
-← Quay lại
-
-</button>
-
-<div class="card">
-
-<p><b>Diện tích:</b>
+<div class="info-item">
+<b>Diện tích:</b>
 <span id="dienTich"></span>
-</p>
+</div>
 
-<br>
-
-<p><b>Số hộ:</b>
+<div class="info-item">
+<b>Số hộ:</b>
 <span id="soHo"></span>
-</p>
+</div>
 
-<br>
+<hr><br>
 
 <h3>Tổ trưởng</h3>
 
@@ -375,18 +352,65 @@ onclick="backToTo()">
 
 </div>
 
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div
+class="footer-item active"
+onclick="goHome()">
+
+<div>🏠</div>
+<span>Home</span>
+
+</div>
+
+<div class="footer-item">
+<div>🔍</div>
+<span>Tìm kiếm</span>
+</div>
+
+<div class="footer-item">
+<div>📊</div>
+<span>Thống kê</span>
+</div>
+
+<div class="footer-item">
+<div>📄</div>
+<span>Báo cáo</span>
+</div>
+
+<div class="footer-item">
+<div>👤</div>
+<span>Tài khoản</span>
+</div>
+
 </div>
 
 <script>
-
-document.getElementById(
-"loginPage"
-).style.display = "flex"
 
 const csvUrl =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
 
 let dsTo = []
+
+function showPage(id){
+
+document.querySelectorAll(
+".page"
+).forEach(page=>{
+
+page.style.display =
+"none"
+
+})
+
+document.getElementById(
+id
+).style.display =
+"block"
+
+}
 
 function login(){
 
@@ -401,9 +425,9 @@ document.getElementById(
 ).value
 
 if(
-user === "admin"
+user==="admin"
 &&
-pass === "123456"
+pass==="123456"
 ){
 
 document.getElementById(
@@ -411,10 +435,9 @@ document.getElementById(
 ).style.display =
 "none"
 
-document.getElementById(
+showPage(
 "homePage"
-).style.display =
-"block"
+)
 
 }else{
 
@@ -428,17 +451,11 @@ alert(
 
 async function openToNDTQ(){
 
-document.getElementById(
-"homePage"
-).style.display =
-"none"
-
-document.getElementById(
+showPage(
 "toPage"
-).style.display =
-"block"
+)
 
-if(dsTo.length > 0){
+if(dsTo.length>0){
 return
 }
 
@@ -456,7 +473,8 @@ rows.forEach(row=>{
 const cols =
 row.split(",")
 
-if(cols.length < 8)return
+if(cols.length<8)
+return
 
 dsTo.push({
 
@@ -526,15 +544,9 @@ ${to.tenTo}
 
 function openToDetail(to){
 
-document.getElementById(
-"toPage"
-).style.display =
-"none"
-
-document.getElementById(
+showPage(
 "detailPage"
-).style.display =
-"block"
+)
 
 document.getElementById(
 "tenTo"
@@ -573,37 +585,14 @@ to.sdtToPho
 
 }
 
-function backToTo(){
+function goHome(){
 
-document.getElementById(
-"detailPage"
-).style.display =
-"none"
-
-document.getElementById(
-"toPage"
-).style.display =
-"block"
-
-}
-function backHome(){
-
-document.getElementById(
-"toPage"
-).style.display =
-"none"
-
-document.getElementById(
-"detailPage"
-).style.display =
-"none"
-
-document.getElementById(
+showPage(
 "homePage"
-).style.display =
-"block"
+)
 
 }
+
 </script>
 
 </body>
