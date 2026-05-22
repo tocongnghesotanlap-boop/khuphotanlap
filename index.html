@@ -851,7 +851,27 @@ row.split(",")
 const hoTen =
 cols[2]?.trim()
 
+// bỏ dòng rỗng
 if(!hoTen)
+return
+
+// bỏ header
+if(
+hoTen.toLowerCase()
+.includes("họ")
+)
+return
+
+// bỏ số thứ tự bị đọc nhầm
+if(
+!isNaN(hoTen)
+)
+return
+
+// bỏ dòng lỗi
+if(
+hoTen.length < 5
+)
 return
 
 dsDangVien.push({
