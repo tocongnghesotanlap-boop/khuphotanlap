@@ -939,12 +939,15 @@ document.getElementById(
 banChiUy
 
 const mienSinhHoat =
-dsDangVien.filter(dv=>
+dsDangVien.filter(dv=>{
 
-dv.mienSinhHoat ===
-"Có"
+return dv
+.mienSinhHoat
+.toLowerCase()
+.trim()
+.includes("có")
 
-).length
+}).length
 
 document.getElementById(
 "mienSinhHoat"
