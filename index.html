@@ -273,6 +273,17 @@ Tổ NDTQ
 <!-- TO NDTQ -->
 
 <div id="toPage">
+  <div style="padding:15px;">
+
+<button
+class="back-btn"
+onclick="backHome()">
+
+← Trang chủ
+
+</button>
+
+</div>
 
 <div class="topbar">
 <h1>TỔ NDTQ</h1>
@@ -554,7 +565,24 @@ document.getElementById(
 "block"
 
 }
+function backHome(){
 
+document.getElementById(
+"toPage"
+).style.display =
+"none"
+
+document.getElementById(
+"detailPage"
+).style.display =
+"none"
+
+document.getElementById(
+"homePage"
+).style.display =
+"block"
+
+}
 </script>
 
 </body>
