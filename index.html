@@ -7,7 +7,44 @@
 <title>Khu phố Tân Lập</title>
 
 <style>
+.dangvien-card{
+  background:white;
+  border-radius:24px;
+  padding:18px;
+  text-align:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  cursor:pointer;
+}
 
+.dangvien-avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #0B3D2E;
+}
+
+.role{
+  margin-top:6px;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.role.bitthu{
+  color:red;
+}
+
+.role.phobithu{
+  color:orange;
+}
+
+.role.chiuy{
+  color:#c9a000;
+}
+
+.role.dangvien{
+  color:green;
+}
 *{
   margin:0;
   padding:0;
@@ -507,6 +544,35 @@ Xem danh sách đảng viên
 </div>
 
 </div>
+  <!-- DANH SACH DANG VIEN -->
+
+<div id="danhSachDangVienPage" class="page">
+
+<div class="topbar">
+
+<h1>ĐẢNG VIÊN</h1>
+
+<p>Danh sách đảng viên</p>
+
+</div>
+
+<div style="padding:20px;">
+
+<input
+id="searchDangVien"
+class="input"
+placeholder="🔍 Tìm tên đảng viên..."
+oninput="renderDanhSachDangVien()">
+
+</div>
+
+<div
+id="dangVienContainer"
+class="grid">
+
+</div>
+
+</div>
 <!-- FOOTER -->
 
 <div class="footer">
@@ -787,17 +853,49 @@ dsDangVien.push({
 hoTen:
 cols[2]?.trim(),
 
-mienSinhHoat:
-cols[12]?.trim(),
+soCCCD:
+cols[3]?.trim(),
+
+ngaySinh:
+cols[5]?.trim(),
+
+ngayVaoDang:
+cols[6]?.trim(),
+
+ngayChinhThuc:
+cols[7]?.trim(),
+
+vanHoa:
+cols[8]?.trim(),
+
+chuyenMon:
+cols[9]?.trim(),
+
+LLCT:
+cols[10]?.trim(),
 
 huyHieuDang:
 cols[11]?.trim(),
 
+mienSinhHoat:
+cols[12]?.trim(),
+
+congViecHienTai:
+cols[13]?.trim(),
+
+soDienThoai:
+cols[14]?.trim(),
+
+toNDTQ:
+cols[15]?.trim(),
+
 chucVuDang:
-cols[16]?.trim()
+cols[16]?.trim(),
+
+anh:
+cols[17]?.trim()
 
 })
-
 })
 
 renderThongKeDangVien()
@@ -858,9 +956,93 @@ mienSinhHoat
 
 function openDanhSachDangVien(){
 
-alert(
-"Đang làm danh sách ảnh 😎"
+showPage(
+"danhSachDangVienPage"
 )
+
+renderDanhSachDangVien()
+
+}
+
+function renderDanhSachDangVien(){
+
+const keyword =
+document.getElementById(
+"searchDangVien"
+).value
+.toLowerCase()
+
+const container =
+document.getElementById(
+"dangVienContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDangVien.filter(dv=>
+
+dv.hoTen
+.toLowerCase()
+.includes(keyword)
+
+)
+
+filtered.forEach(dv=>{
+
+let roleClass =
+"dangvien"
+
+if(
+dv.chucVuDang ===
+"Bí thư"
+){
+roleClass =
+"bitthu"
+}
+
+if(
+dv.chucVuDang ===
+"Phó Bí thư"
+){
+roleClass =
+"phobithu"
+}
+
+if(
+dv.chucVuDang ===
+"Chi ủy viên"
+){
+roleClass =
+"chiuy"
+}
+
+container.innerHTML += `
+
+<div
+class="dangvien-card"
+onclick='openDetailDangVien(
+${JSON.stringify(dv)}
+)'>
+
+<img
+class="dangvien-avatar"
+src="images/dangvien/${dv.anh}"
+onerror="this.src='avatar.png'">
+
+<h3>
+${dv.hoTen}
+</h3>
+
+<div class="role ${roleClass}">
+${dv.chucVuDang}
+</div>
+
+</div>
+
+`
+
+})
 
 }
 </script>
