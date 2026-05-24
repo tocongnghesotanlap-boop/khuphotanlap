@@ -602,6 +602,41 @@ Xem danh sách đảng viên
 </div>
 
 </div>
+  <div
+id="danhSachDangVienPage"
+class="page"
+>
+
+<div class="topbar">
+<h1>DANH SÁCH ĐẢNG VIÊN</h1>
+<p>Chi bộ khu phố Tân Lập</p>
+</div>
+
+<div style="padding:20px;">
+
+<input
+type="text"
+id="searchDangVien"
+placeholder="🔍 Tìm đảng viên..."
+oninput="renderDanhSachDangVien()"
+style="
+width:100%;
+padding:16px;
+border-radius:18px;
+border:none;
+font-size:16px;
+margin-bottom:20px;
+"
+/>
+
+<div
+id="dangVienContainer"
+class="grid"
+></div>
+
+</div>
+
+</div>
 <!-- FOOTER -->
 
 <div class="footer">
