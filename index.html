@@ -849,6 +849,72 @@ document.getElementById(
 renderDanhSachDangVien()
 
 }
+  let pageHistory = []
+
+function showPage(pageId){
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display="none"
+})
+
+document
+.getElementById(pageId)
+.style.display="block"
+
+if(
+pageHistory[
+pageHistory.length-1
+] !== pageId
+){
+pageHistory.push(pageId)
+}
+
+updateBackButton()
+
+}
+
+function goBack(){
+
+if(pageHistory.length > 1){
+
+pageHistory.pop()
+
+const prevPage =
+pageHistory[
+pageHistory.length-1
+]
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display="none"
+})
+
+document
+.getElementById(prevPage)
+.style.display="block"
+
+}
+
+updateBackButton()
+
+}
+
+function updateBackButton(){
+
+const btn =
+document.getElementById(
+"backBtn"
+)
+
+btn.style.display =
+pageHistory.length > 1
+? "block"
+: "none"
+
+}
 </script>
 
 </body>
