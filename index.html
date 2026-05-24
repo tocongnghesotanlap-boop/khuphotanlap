@@ -816,9 +816,15 @@ mienSinhHoat
 
 function openDanhSachDangVien(){
 
-alert(
-"Đang làm danh sách ảnh 😎"
-)
+document.getElementById(
+"chiBoPage"
+).style.display = "none"
+
+document.getElementById(
+"danhSachDangVienPage"
+).style.display = "block"
+
+renderDanhSachDangVien()
 
 }
 </script>
