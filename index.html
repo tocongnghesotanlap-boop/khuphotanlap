@@ -165,6 +165,7 @@ body{
   margin-bottom:14px;
 }
 <!-- DANH SACH DANG VIEN -->
+<!-- DANH SACH DANG VIEN -->
 
 <div
 id="danhSachDangVienPage"
@@ -183,6 +184,32 @@ Chi bộ khu phố Tân Lập
 
 </div>
 
+<div style="padding:20px;">
+
+<input
+type="text"
+id="searchDangVien"
+placeholder="🔍 Tìm đảng viên..."
+oninput="renderDanhSachDangVien()"
+style="
+width:100%;
+padding:16px;
+border-radius:18px;
+border:none;
+font-size:16px;
+margin-bottom:20px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+"
+/>
+
+<div
+id="dangVienContainer"
+class="grid"
+></div>
+
+</div>
+
+</div>
 <div style="padding:20px;">
 
 <input
@@ -622,14 +649,6 @@ const csvUrl =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
 
 let dsTo = []
-
-)
-
-document.getElementById(
-id
-).style.display =
-"block"
-
 }
 
 function login(){
@@ -922,9 +941,6 @@ mienSinhHoat
 }
 
 function openDanhSachDangVien(){
-
-function openDanhSachDangVien(){
-
 showPage(
 "danhSachDangVienPage"
 )
