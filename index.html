@@ -1199,12 +1199,26 @@ document.getElementById(
 banChiUy
 
 const mienSinhHoat =
-dsDangVien.filter(dv=>
+dsDangVien.filter(dv=>{
 
-dv.mienSinhHoat ===
-"Có"
+const msh =
+String(
+dv.mienSinhHoat || ""
+)
+.trim()
+.toLowerCase()
 
-).length
+return (
+msh !== ""
+&&
+msh !== "không"
+&&
+msh !== "khong"
+&&
+msh !== "0"
+)
+
+}).length
 
 document.getElementById(
 "mienSinhHoat"
