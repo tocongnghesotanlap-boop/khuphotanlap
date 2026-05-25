@@ -1701,6 +1701,70 @@ cols[10]?.trim()
 })
 
 }
+  function openLoaiDoiTuong(loai){
+
+showPage(
+"danhSachDoiTuongPage"
+)
+
+document.getElementById(
+"tenLoaiDoiTuong"
+).innerText =
+loai.toUpperCase()
+
+const container =
+document.getElementById(
+"doiTuongContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDoiTuong.filter(dt =>
+
+(dt.loai || "")
+.trim()
+.toLowerCase()
+===
+loai
+.toLowerCase()
+
+)
+
+let html = ""
+
+filtered.forEach(dt=>{
+
+html += `
+
+<div
+class="dangvien-card"
+onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
+>
+
+<img
+class="dangvien-avatar"
+src="images/doituong/${dt.anh || "avatar.png"}"
+onerror="this.onerror=null;this.src='avatar.png'"
+>
+
+<h3>
+${dt.hoTen || ""}
+</h3>
+
+<p>
+⚠️ ${dt.loai || ""}
+</p>
+
+</div>
+
+`
+
+})
+
+container.innerHTML = html
+
+}
 </script>
 
 </body>
