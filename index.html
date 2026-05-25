@@ -1064,31 +1064,48 @@ const rows = csv
 .map(row => row.trim())
 .filter(row => row !== "")
 
+dsDangVien = []
+
 rows.forEach(row=>{
 
 const cols =
 row.split(",")
 
 const hoTen =
-cols[2]?.trim()
+cols[2]
+?.trim()
+?.replace(/"/g,"")
 
 // bỏ dòng rỗng
 if(!hoTen) return
 
-// bỏ dòng bị lỗi header
+// bỏ header
 if(
-hoTen === "hoTen"
+hoTen.toLowerCase()
+=== "hoten"
+) return
+
+// bỏ dòng lỗi
+if(
+hoTen.length < 3
 ) return
 
 // chống trùng tên
 const daTonTai =
 dsDangVien.some(
 dv =>
-dv.hoTen === hoTen
+dv.hoTen
+?.trim()
+?.toLowerCase()
+===
+hoTen
+.toLowerCase()
 )
 
 if(daTonTai)
 return
+
+dsDangVien.push({
 
 dsDangVien.push({
 stt:
