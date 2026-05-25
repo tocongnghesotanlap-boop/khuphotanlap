@@ -1143,7 +1143,10 @@ showPage(
 }
 const dangVienCsv =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1024784158&single=true&output=csv"
+const doiTuongCsv =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1068681591&single=true&output=csv"
 
+let dsDoiTuong = []
 let dsDangVien = []
 
 async function openDangVien(){
@@ -1632,55 +1635,76 @@ diaChi:"Tổ 7"
 
 ]
 
-function openDoiTuong(){
+async function openDoiTuong(){
 
 showPage(
 "doiTuongPage"
 )
 
+if(
+dsDoiTuong.length > 0
+){
+return
 }
 
-function openLoaiDoiTuong(loai){
-
-showPage(
-"danhSachDoiTuongPage"
+const res =
+await fetch(
+doiTuongCsv
 )
 
-document.getElementById(
-"tenLoaiDoiTuong"
-).innerText =
-loai.toUpperCase()
+const csv =
+await res.text()
 
-const container =
-document.getElementById(
-"doiTuongContainer"
-)
+const rows =
+csv
+.split("\n")
+.slice(1)
+.map(row=>row.trim())
+.filter(row=>row!=="")
 
-container.innerHTML = ""
+dsDoiTuong = []
 
-const filtered =
-dsDoiTuong.filter(
-dt =>
-dt.loai === loai
-)
+rows.forEach(row=>{
 
-filtered.forEach(dt=>{
+const cols =
+row.split(",")
 
-container.innerHTML += `
+if(!cols[1])
+return
 
-<div class="dangvien-card">
+dsDoiTuong.push({
 
-<h3>
-${dt.hoTen}
-</h3>
+stt:
+cols[0]?.trim(),
 
-<p>
-📍 ${dt.diaChi}
-</p>
+hoTen:
+cols[1]?.trim(),
 
-</div>
+loai:
+cols[2]?.trim(),
 
-`
+ngaySinh:
+cols[3]?.trim(),
+
+CCCD:
+cols[4]?.trim(),
+
+diaChi:
+cols[5]?.trim(),
+
+soDienThoai:
+cols[6]?.trim(),
+
+quanLy:
+cols[7]?.trim(),
+
+ghiChu:
+cols[8]?.trim(),
+
+anh:
+cols[9]?.trim()
+
+})
 
 })
 
