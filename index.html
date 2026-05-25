@@ -926,17 +926,17 @@ function login(){
 const user =
 document.getElementById(
 "username"
-).value
+).value.trim()
 
 const pass =
 document.getElementById(
 "password"
-).value
+).value.trim()
 
 if(
-user==="admin"
+user === "admin"
 &&
-pass==="123456"
+pass === "123456"
 ){
 
 localStorage.setItem(
@@ -944,9 +944,17 @@ localStorage.setItem(
 "true"
 )
 
+document.getElementById(
+"loginPage"
+).style.display =
+"none"
+
 showPage(
 "homePage"
 )
+
+pageHistory =
+["homePage"]
 
 }else{
 
@@ -957,7 +965,6 @@ alert(
 }
 
 }
-
 function logout(){
 
 localStorage.removeItem(
@@ -1237,27 +1244,45 @@ document.addEventListener(
 "DOMContentLoaded",
 function(){
 
-const login =
+const isLoggedIn =
 localStorage.getItem(
 "isLoggedIn"
 )
 
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display =
+"none"
+})
+
 if(
-login==="true"
+isLoggedIn === "true"
 ){
+
+document.getElementById(
+"loginPage"
+).style.display =
+"none"
+
 showPage(
 "homePage"
 )
+
+pageHistory =
+["homePage"]
+
 }else{
+
 document.getElementById(
 "loginPage"
 ).style.display =
 "flex"
+
 }
 
 }
 )
-
 </script>
   </body>
 </html>
