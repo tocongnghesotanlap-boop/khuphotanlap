@@ -165,7 +165,75 @@ body{
   margin-bottom:14px;
 }
 /* DANH SACH DANG VIEN */
+<div
+id="doiTuongDetailPage"
+class="page"
+>
 
+<div class="topbar">
+<h1>THÔNG TIN ĐỐI TƯỢNG</h1>
+<p>Quản lý địa bàn</p>
+</div>
+
+<div class="detail-card">
+
+<div style="text-align:center;">
+
+<img
+id="dtAvatar"
+class="dangvien-avatar"
+src="avatar.png"
+/>
+
+<h2 id="dtHoTen"></h2>
+
+<p id="dtLoai"></p>
+
+</div>
+
+<div class="detail-grid">
+
+<div class="info-card">
+<div class="info-title">
+🆔 CCCD
+</div>
+<div id="dtCCCD"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+🏠 Địa chỉ
+</div>
+<div id="dtDiaChi"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+🏡 Nơi thường trú
+</div>
+<div id="dtNoiThuongTru"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+📞 Điện thoại
+</div>
+<div id="dtPhone"
+class="info-value">
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
 /* FOOTER */
 
 .footer{
@@ -865,6 +933,7 @@ Chính trị
 
 </div>
   <div
+<div
 id="danhSachDoiTuongPage"
 class="page"
 >
@@ -878,13 +947,15 @@ class="page"
 <p>
 Danh sách quản lý
 </p>
-</div> <!-- danhSachDoiTuongPage -->
 
-<!-- FOOTER -->
+</div>
+
 <div
-id="danhSachDoiTuongPage"
-class="page"
->
+id="doiTuongContainer"
+class="grid"
+></div>
+
+</div>
 
 <div class="topbar">
 
@@ -1468,17 +1539,6 @@ window.scrollTo(
 
 updateBackButton()
 
-}const btn =
-document.getElementById(
-"backBtn"
-)
-
-btn.style.display =
-pageHistory.length > 1
-? "block"
-: "none"
-
-}
   function renderDanhSachDangVien(){
 
 const keyword =
