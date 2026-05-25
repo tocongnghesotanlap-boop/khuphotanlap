@@ -829,7 +829,7 @@ await res.text()
 
 const rows =
 csv.split("\n")
-.slice(1)
+.filter(row => row.trim() !== "")
 
 rows.forEach(row=>{
 
@@ -914,11 +914,18 @@ mienSinhHoat
 }
 
 function openDanhSachDangVien(){
+
 showPage(
 "danhSachDangVienPage"
 )
 
+if(
+document.getElementById(
+"dangVienContainer"
+).innerHTML === ""
+){
 renderDanhSachDangVien()
+}
 
 }
   let pageHistory = []
@@ -1025,7 +1032,13 @@ card.innerHTML = `
 
 <img
 class="dangvien-avatar"
-src="images/dangvien/${dv.hoTen}.jpg"
+src="images/dangvien/${
+dv.hoTen
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/\s+/g," ")
+.trim()
+}.jpg"
 onerror="this.src='avatar.png'"
 >
 
