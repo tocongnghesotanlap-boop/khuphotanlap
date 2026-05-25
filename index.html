@@ -1359,13 +1359,11 @@ renderDanhSachDangVien()
 
 function showPage(pageId){
 
-// ẩn login
 document.getElementById(
 "loginPage"
 ).style.display =
 "none"
 
-// ẩn tất cả page
 document
 .querySelectorAll(".page")
 .forEach(page=>{
@@ -1373,13 +1371,14 @@ page.style.display =
 "none"
 })
 
-// hiện page
-document
-.getElementById(pageId)
-.style.display =
+const page =
+document.getElementById(
+pageId
+)
+
+page.style.display =
 "block"
 
-// history
 if(
 pageHistory[
 pageHistory.length - 1
@@ -1392,35 +1391,12 @@ pageId
 
 updateBackButton()
 
-}
-
-function goBack(){
-
-if(pageHistory.length > 1){
-
-pageHistory.pop()
-
-const prevPage =
-pageHistory[
-pageHistory.length-1
-]
-
-document
-.querySelectorAll(".page")
-.forEach(page=>{
-page.style.display="none"
-})
-
-document
-.getElementById(prevPage)
-.style.display="block"
+window.scrollTo(
+0,
+0
+)
 
 }
-
-updateBackButton()
-
-}
-
 function updateBackButton(){
 
 const btn =
