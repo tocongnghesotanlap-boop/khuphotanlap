@@ -1721,7 +1721,9 @@ ghiChu:
 cols[8]?.trim(),
 
 anh:
-cols[9]?.trim(),
+(cols[9] || "")
+.replace(/"/g,"")
+.trim(),
 
 noiThuongTru:
 cols[10]?.trim()
