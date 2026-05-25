@@ -1736,6 +1736,94 @@ console.error(error)
 
 }
 }
+  function openLoaiDoiTuong(loai){
+
+showPage(
+"danhSachDoiTuongPage"
+)
+
+document.getElementById(
+"tenLoaiDoiTuong"
+).innerText =
+loai.toUpperCase()
+
+const container =
+document.getElementById(
+"doiTuongContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDoiTuong.filter(dt =>
+
+(dt.loai || "")
+.trim()
+.toLowerCase()
+===
+loai
+.trim()
+.toLowerCase()
+
+)
+
+if(filtered.length === 0){
+
+container.innerHTML = `
+
+<div style="
+grid-column:1/-1;
+text-align:center;
+padding:40px;
+font-size:18px;
+font-weight:bold;
+color:#777;
+">
+
+Không có dữ liệu
+
+</div>
+
+`
+
+return
+
+}
+
+let html = ""
+
+filtered.forEach(dt=>{
+
+html += `
+
+<div
+class="dangvien-card"
+onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
+>
+
+<img
+class="dangvien-avatar"
+src="images/doituong/${dt.anh || "avatar.png"}"
+onerror="this.onerror=null;this.src='avatar.png'"
+>
+
+<h3>
+${dt.hoTen || ""}
+</h3>
+
+<p>
+⚠️ ${dt.loai || ""}
+</p>
+
+</div>
+
+`
+
+})
+
+container.innerHTML = html
+
+}
 </script>
 
 </body>
