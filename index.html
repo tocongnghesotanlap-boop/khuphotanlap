@@ -1810,8 +1810,12 @@ onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
 
 <img
 class="dangvien-avatar"
-src="images/doi-tuong/${(dt.anh || '').trim()}"
-onerror="this.onerror=null;this.src='avatar.png'"
+src="https://khuphotanlap.vercel.app/images/doi-tuong/${encodeURIComponent((dt.anh || '').replace(/"/g,'').trim())}"
+onerror="
+console.log('Ảnh lỗi:',this.src);
+this.onerror=null;
+this.src='https://khuphotanlap.vercel.app/avatar.png'
+"
 >
 <h3>
 ${dt.hoTen || ""}
