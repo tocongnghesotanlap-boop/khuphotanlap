@@ -1,407 +1,172 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khu phố Tân Lập - Quản lý địa bàn số</title>
+  <style>
+    /* --- HỆ THỐNG CỐT LÕI & RESET --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    body {
+      background: #f5f5f5;
+      color: #222;
+      line-height: 1.5;
+    }
 
-<title>Khu phố Tân Lập</title>
+    /* --- NÚT BACK CỐ ĐỊNH --- */
+    #backBtn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 9999;
+      background: #0b5d46;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      display: none;
+      transition: background 0.2s;
+    }
+    #backBtn:hover {
+      background: #0d7458;
+    }
 
-<style>
-#backBtn{
-position:fixed;
-top:15px;
-left:15px;
-z-index:9999;
-background:#0b5d46;
-color:#fff;
-border:none;
-padding:12px 18px;
-border-radius:14px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 4px 12px rgba(0,0,0,.2);
-display:none;
-}
+    /* --- TRANG ĐĂNG NHẬP --- */
+    #loginPage {
+      min-height: 100vh;
+      background: #0B3D2E;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 420px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .logo {
+      width: 140px;
+      border-radius: 24px;
+    }
+    .title {
+      color: #F4C430;
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 15px;
+      letter-spacing: 0.5px;
+    }
+    .subtitle {
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 6px;
+      font-size: 16px;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+    .input {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: 2px solid #e0e0e0;
+      font-size: 16px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input:focus {
+      border-color: #0B3D2E;
+    }
+    .btn {
+      width: 100%;
+      border: none;
+      background: #F4C430;
+      color: #000;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
 
-#backBtn:hover{
-background:#0d7458;
-}
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
+    /* --- KHUNG TRANG PHÂN HỆ --- */
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+    .topbar {
+      background: #0B3D2E;
+      padding: 28px 24px;
+      color: white;
+      text-align: center;
+    }
+    .topbar h1 {
+      color: #F4C430;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    .topbar p {
+      color: rgba(255,255,255,0.8);
+      font-size: 14px;
+      margin-top: 4px;
+    }
 
-body{
-  background:#f5f5f5;
-}
+    /* --- LƯỚI MENU & THẺ THÔNG TIN --- */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
+    .card-menu {
+      background: white;
+      border-radius: 20px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,.05);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-menu:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.08);
+    }
+    .icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+    .name {
+      font-weight: bold;
+      color: #0B3D2E;
+      font-size: 15px;
+    }
 
-/* LOGIN */
-#loginPage{
-  min-height:100vh;
-  background:#0B3D2E;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
-
-.container{
-  width:100%;
-  max-width:420px;
-}
-
-.header{
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.logo{
-  width:170px;
-  border-radius:30px;
-}
-
-.title{
-  color:#F4C430;
-  font-size:34px;
-  font-weight:bold;
-  margin-top:18px;
-}
-
-.subtitle{
-  color:white;
-  margin-top:8px;
-}
-
-.card{
-  background:white;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
-
-.input{
-  width:100%;
-  padding:18px;
-  border-radius:18px;
-  border:2px solid #ddd;
-  font-size:16px;
-  margin-bottom:16px;
-}
-
-.btn{
-  width:100%;
-  border:none;
-  background:#F4C430;
-  color:#000;
-  padding:18px;
-  border-radius:18px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-/* PAGE */
-.page{
-  display:none;
-  min-height:100vh;
-  padding-bottom:90px;
-}
-
-.topbar{
-  background:#0B3D2E;
-  padding:24px;
-  color:white;
-}
-
-.topbar h1{
-  color:#F4C430;
-  font-size:28px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  padding:20px;
-}
-
-.card-menu{
-  background:white;
-  border-radius:24px;
-  padding:26px;
-  text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  cursor:pointer;
-}
-
-.card-menu:hover{
-  transform:scale(1.02);
-}
-
-.icon{
-  font-size:40px;
-}
-
-.name{
-  margin-top:10px;
-  font-weight:bold;
-  color:#0B3D2E;
-}
-
-.detail-card{
-  background:white;
-  margin:20px;
-  padding:24px;
-  border-radius:24px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-
-.info-item{
-  margin-bottom:14px;
-}
-
-/* FOOTER */
-.footer{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:80px;
-background:#fff;
-display:flex;
-justify-content:space-around;
-align-items:center;
-box-shadow:0 -4px 18px rgba(0,0,0,.12);
-z-index:99999;
-border-top-left-radius:24px;
-border-top-right-radius:24px;
-}
-
-.footer-item{
-flex:1;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100%;
-text-align:center;
-font-size:12px;
-color:#666;
-cursor:pointer;
-}
-
-.footer-item div{
-font-size:24px;
-margin-bottom:4px;
-}
-
-.footer-item span{
-display:block;
-font-size:12px;
-}
-.stat-number{
-font-size:34px;
-font-weight:bold;
-color:#0B3D2E;
-margin-top:10px;
-}
-
-.big-card{
-background:#fff;
-margin:20px;
-padding:30px;
-border-radius:24px;
-text-align:center;
-font-size:26px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-
-.dangvien-card{
-background:#fff;
-border-radius:24px;
-padding:20px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-cursor:pointer;
-}
-
-.dangvien-avatar{
-width:100px;
-height:100px;
-aspect-ratio:1/1;
-background:#eee;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #0B3D2E;
-margin-bottom:12px;
-}
-  .stats-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-padding:20px;
-}
-
-.stat-card{
-background:#fff;
-border-radius:24px;
-padding:26px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-
-.stat-card div{
-font-size:18px;
-font-weight:bold;
-margin-top:8px;
-}
-  .detail-grid{
-display:grid;
-grid-template-columns: repeat(2,minmax(0,1fr));
-gap:14px;
-margin-top:20px;
-width:100%;
-}
-
-@media(max-width:768px){
-.detail-grid{
-grid-template-columns: 1fr 1fr;
-}
-}
-
-.info-card{
-background:#fff;
-border-radius:22px;
-padding:18px;
-box-shadow: 0 4px 14px rgba(0,0,0,.08);
-border-left: 5px solid #0B3D2E;
-min-height:95px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-.info-title{
-font-size:13px;
-font-weight:600;
-color:#0B3D2E;
-margin-bottom:6px;
-display:flex;
-align-items:center;
-gap:6px;
-line-height:1.3;
-}
-
-.info-value{
-font-size:13px;
-font-weight:500;
-color:#222;
-word-break:break-word;
-line-height:1.4;
-margin-top:2px;
-}
-.detail-card{
-background:#f5f5f5;
-border-radius:28px;
-padding:20px;
-margin:20px;
-box-shadow: 0 8px 20px rgba(0,0,0,.08);
-}
-</style>
-</head>
-
-<body>
-<button id="backBtn" onclick="goBack()">
-← Trở về
-</button>
-
-<div id="loginPage">
-<div class="container">
-<div class="header">
-<img src="logo.png" class="logo">
-<div class="title">KHU PHỐ TÂN LẬP</div>
-<div class="subtitle">Quản lý địa bàn số</div>
-</div>
-<div class="card">
-<input id="username" class="input" placeholder="Tài khoản">
-<input id="password" class="input" type="password" placeholder="Mật khẩu">
-<button class="btn" onclick="login()">ĐĂNG NHẬP</button>
-</div>
-</div>
-</div>
-
-<div id="homePage" class="page">
-<div class="topbar">
-<h1>KHU PHỐ TÂN LẬP</h1>
-<p>Quản lý địa bàn số</p>
-</div>
-<div class="grid">
-<div class="card-menu">
-<div class="icon">📊</div>
-<div class="name">Tổng quan</div>
-</div>
-<div class="card-menu" onclick="openToNDTQ()">
-<div class="icon">🏘️</div>
-<div class="name">Tổ NDTQ</div>
-</div>
-<div class="card-menu">
-<div class="icon">👥</div>
-<div class="name">Nhân khẩu</div>
-</div>
-<div class="card-menu">
-<div class="icon">🏪</div>
-<div class="name">Hộ kinh doanh</div>
-</div>
-<div class="card-menu" onclick="openDangVien()">
-<div class="icon">🧑‍💼</div>
-<div class="name">Đảng viên</div>
-</div>
-<div class="card-menu" onclick="openDoiTuong()">
-<div class="icon">⚠️</div>
-<div class="name">Đối tượng</div>
-</div>
-</div>
-</div>
-
-<div id="toPage" class="page">
-<div class="topbar">
-<h1>TỔ NDTQ</h1>
-<p>13 tổ nhân dân tự quản</p>
-</div>
-<div id="toContainer" class="grid"></div>
-</div>
-
-<div id="detailPage" class="page">
-<div class="topbar">
-<h1 id="tenTo"></h1>
-<p>Thông tin tổ</p>
-</div>
-<div class="detail-card">
-<div class="info-item">
-<b>Diện tích:</b> <span id="dienTich"></span>
-</div>
-<div class="info-item">
-<b>Số hộ:</b> <span id="soHo"></span>
-</div>
-<hr><br>
-<h3>Tổ trưởng</h3>
-<p id="toTruong"></p>
-<p>📞 <span id="sdtTruong"></span></p>
-<br>
-<h3>Tổ phó</h3>
-<p id="toPho"></p>
-<p>📞 <span id="sdtPho"></span></p>
-</div>
-</div>
-
-<div id="dangVienPage" class="page">
-<div class="topbar">
-<h1>CHI BỘ TÂN LẬP</h1>
-<p>Tổng quan đảng viên</p>
-</div>
-<div class="stats-grid">
-<div class="stat-
+    /* Thẻ lớn danh sách */
+    .big-card {
+      background: white;
+      margin: 0 20px 20px 20px;
+      padding: 24px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0
