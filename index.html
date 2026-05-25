@@ -679,16 +679,7 @@ searchTimeout =
 setTimeout(()=>{
 
 renderDanhSachDangVien()
-
-},300)
-
-}
-)
-const csvUrl =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
-
-let dsTo = []
-  function openDangVienDetail(dv){
+   function openDangVienDetail(dv){
 
 showPage(
 "dangVienDetailPage"
@@ -723,6 +714,16 @@ dv.hinhAnh || "avatar.png"
 
 }
 
+
+},300)
+
+}
+)
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
+
+let dsTo = []
+ 
   function login(){
 
 const user =
