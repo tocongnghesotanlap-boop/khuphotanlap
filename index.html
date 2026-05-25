@@ -870,27 +870,6 @@ id="danhSachDoiTuongPage"
 class="page"
 >
 
-<div class="topbar">
-
-<h1 id="tenLoaiDoiTuong">
-ĐỐI TƯỢNG
-</h1>
-
-<p>
-Danh sách quản lý
-</p>
-
-</div>
-
-<div
-id="doiTuongContainer"
-class="grid"
-></div>
-
-</div>
-
-<div class="topbar">
-
 <h1 id="tenLoaiDoiTuong">
 ĐỐI TƯỢNG
 </h1>
@@ -965,6 +944,25 @@ class="info-value">
 <div class="info-card">
 <div class="info-title">
 📞 Điện thoại
+  <div class="info-card">
+<div class="info-title">
+👮 Quản lý
+</div>
+<div
+id="dtQuanLy"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+📌 Ghi chú
+</div>
+<div
+id="dtGhiChu"
+class="info-value">
+</div>
+</div>
 </div>
 <div id="dtPhone"
 class="info-value">
@@ -1747,8 +1745,14 @@ async function openDoiTuong(){
 
 showPage(
 "doiTuongPage"
+})
+
+console.log(
+"Đối tượng:",
+dsDoiTuong
 )
 
+}
 if(
 dsDoiTuong.length > 0
 ){
