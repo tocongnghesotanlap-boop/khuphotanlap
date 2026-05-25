@@ -593,41 +593,120 @@ class="page"
 <p>Chi bộ khu phố Tân Lập</p>
 </div>
 
-<div class="detail-card" style="text-align:center;">
+<div class="detail-card">
+
+<div style="text-align:center;">
 
 <img
 id="detailAvatar"
 class="dangvien-avatar"
 src="avatar.png"
-style="width:140px;height:140px;"
->
+style="
+width:150px;
+height:150px;
+margin-bottom:16px;
+"
+/>
 
 <h2 id="detailHoTen"></h2>
 
 <p
 id="detailChucVu"
 style="
-font-size:18px;
-color:#0B3D2E;
+font-size:20px;
 font-weight:bold;
-margin:10px 0;
+color:#0B3D2E;
+margin-bottom:20px;
 "
 ></p>
 
-<hr style="margin:20px 0">
-
-<div class="info-item">
-<b>🎖️ Huy hiệu Đảng:</b>
-<span id="detailHuyHieu"></span>
 </div>
 
-<div class="info-item">
-<b>🟡 Miễn sinh hoạt:</b>
-<span id="detailMienSinhHoat"></span>
+<div class="info-row">
+<div class="info-label">
+🪪 Số thẻ Đảng
+</div>
+<div id="detailSoThe"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🆔 CCCD
+</div>
+<div id="detailCCCD"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🎂 Ngày sinh
+</div>
+<div id="detailNgaySinh"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+📅 Ngày vào Đảng
+</div>
+<div id="detailNgayVaoDang"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+📅 Chính thức
+</div>
+<div id="detailNgayChinhThuc"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🎓 Chuyên môn
+</div>
+<div id="detailChuyenMon"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🏅 LLCT
+</div>
+<div id="detailLLCT"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🎖️ Huy hiệu Đảng
+</div>
+<div id="detailHuyHieu"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🟡 Miễn sinh hoạt
+</div>
+<div id="detailMienSinhHoat"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+💼 Công việc
+</div>
+<div id="detailCongViec"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+📞 Điện thoại
+</div>
+<div id="detailPhone"></div>
+</div>
+
+<div class="info-row">
+<div class="info-label">
+🏘️ Tổ NDTQ
+</div>
+<div id="detailTo"></div>
 </div>
 
 </div>
-
 </div>
 <!-- FOOTER -->
 
@@ -908,14 +987,53 @@ return
 
 dsDangVien.push({
 
+stt:
+cols[0]?.trim(),
+
+soTheDangVien:
+cols[1]?.trim(),
+
 hoTen:
 cols[2]?.trim(),
+
+soCCCD:
+cols[3]?.trim(),
+
+ngayCap:
+cols[4]?.trim(),
+
+ngaySinh:
+cols[5]?.trim(),
+
+ngayVaoDang:
+cols[6]?.trim(),
+
+ngayChinhThuc:
+cols[7]?.trim(),
+
+vanHoa:
+cols[8]?.trim(),
+
+chuyenMon:
+cols[9]?.trim(),
+
+LLCT:
+cols[10]?.trim(),
+
+huyHieuDang:
+cols[11]?.trim(),
 
 mienSinhHoat:
 cols[12]?.trim(),
 
-huyHieuDang:
-cols[11]?.trim(),
+congViecHienTai:
+cols[13]?.trim(),
+
+soDienThoai:
+cols[14]?.trim(),
+
+toNDTQ:
+cols[15]?.trim(),
 
 chucVuDang:
 cols[16]?.trim(),
@@ -1129,6 +1247,13 @@ showPage(
 )
 
 document.getElementById(
+"detailAvatar"
+).src =
+`images/dangvien/${
+dv.hinhAnh || "avatar.png"
+}`
+
+document.getElementById(
 "detailHoTen"
 ).innerText =
 dv.hoTen || ""
@@ -1139,6 +1264,41 @@ document.getElementById(
 dv.chucVuDang || "Đảng viên"
 
 document.getElementById(
+"detailSoThe"
+).innerText =
+dv.soTheDangVien || ""
+
+document.getElementById(
+"detailCCCD"
+).innerText =
+dv.soCCCD || ""
+
+document.getElementById(
+"detailNgaySinh"
+).innerText =
+dv.ngaySinh || ""
+
+document.getElementById(
+"detailNgayVaoDang"
+).innerText =
+dv.ngayVaoDang || ""
+
+document.getElementById(
+"detailNgayChinhThuc"
+).innerText =
+dv.ngayChinhThuc || ""
+
+document.getElementById(
+"detailChuyenMon"
+).innerText =
+dv.chuyenMon || ""
+
+document.getElementById(
+"detailLLCT"
+).innerText =
+dv.LLCT || ""
+
+document.getElementById(
 "detailHuyHieu"
 ).innerText =
 dv.huyHieuDang || "Chưa có"
@@ -1147,6 +1307,27 @@ document.getElementById(
 "detailMienSinhHoat"
 ).innerText =
 dv.mienSinhHoat || "Không"
+
+document.getElementById(
+"detailCongViec"
+).innerText =
+dv.congViecHienTai || ""
+
+document.getElementById(
+"detailPhone"
+).innerHTML =
+dv.soDienThoai
+? `<a href="tel:${dv.soDienThoai}">
+${dv.soDienThoai}
+</a>`
+: ""
+
+document.getElementById(
+"detailTo"
+).innerText =
+dv.toNDTQ || ""
+
+}
 
 document.getElementById(
 "detailAvatar"
