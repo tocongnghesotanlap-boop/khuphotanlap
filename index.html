@@ -823,9 +823,12 @@ onclick="goHome()">
 <span>Báo cáo</span>
 </div>
 
-<div class="footer-item">
+<div
+class="footer-item"
+onclick="logout()"
+>
 <div>👤</div>
-<span>Tài khoản</span>
+<span>Đăng xuất</span>
 </div>
 
 </div>
@@ -872,6 +875,12 @@ user==="admin"
 &&
 pass==="123456"
 ){
+
+// lưu trạng thái đăng nhập
+localStorage.setItem(
+"isLoggedIn",
+"true"
+)
 
 document.getElementById(
 "loginPage"
@@ -1461,7 +1470,30 @@ document.getElementById(
 dv.toNDTQ || ""
 
 }
+window.onload = function(){
 
+const isLoggedIn =
+localStorage.getItem(
+"isLoggedIn"
+)
+
+if(
+isLoggedIn ===
+"true"
+){
+
+document.getElementById(
+"loginPage"
+).style.display =
+"none"
+
+showPage(
+"homePage"
+)
+
+}
+
+}
 </script>
 
 </body>
