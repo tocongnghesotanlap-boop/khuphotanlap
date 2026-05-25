@@ -563,7 +563,6 @@ class="page"
 type="text"
 id="searchDangVien"
 placeholder="🔍 Tìm đảng viên..."
-onkeyup="renderDanhSachDangVien()"
 style="
 width:100%;
 padding:16px;
@@ -618,7 +617,25 @@ onclick="goHome()">
 </div>
 
 <script>
+let searchTimeout
 
+document
+.getElementById("searchDangVien")
+.addEventListener(
+"input",
+function(){
+
+clearTimeout(searchTimeout)
+
+searchTimeout =
+setTimeout(()=>{
+
+renderDanhSachDangVien()
+
+},300)
+
+}
+)
 const csvUrl =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
 
