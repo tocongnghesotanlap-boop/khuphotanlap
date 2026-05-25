@@ -43,7 +43,7 @@ body{
 #loginPage{
   min-height:100vh;
   background:#0B3D2E;
-  display:flex;
+  display:none;
   justify-content:center;
   align-items:center;
   padding:20px;
@@ -1482,35 +1482,26 @@ localStorage.getItem(
 "isLoggedIn"
 )
 
-// ẩn tất cả page trước
+// ẩn tất cả page
 document
 .querySelectorAll(".page")
 .forEach(page=>{
-page.style.display="none"
+page.style.display =
+"none"
 })
 
 if(
 isLoggedIn === "true"
 ){
 
-// ẩn login
 document.getElementById(
 "loginPage"
 ).style.display =
 "none"
 
-// hiện home
-document.getElementById(
+showPage(
 "homePage"
-).style.display =
-"block"
-
-// reset history
-pageHistory = [
-"homePage"
-]
-
-updateBackButton()
+)
 
 }else{
 
