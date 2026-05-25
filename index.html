@@ -1021,6 +1021,9 @@ dsDangVien.filter(dv=>
 .includes(keyword)
 
 )
+
+filtered.forEach((dv)=>{
+
 const tenKhongDau =
 (dv.hoTen || "")
 .normalize("NFD")
@@ -1028,7 +1031,6 @@ const tenKhongDau =
 .replace(/đ/g,"d")
 .replace(/Đ/g,"D")
 .trim()
-filtered.forEach((dv)=>{
 
 const card =
 document.createElement("div")
@@ -1037,6 +1039,7 @@ card.className =
 "dangvien-card"
 
 card.innerHTML = `
+
 <img
 class="dangvien-avatar"
 src="images/dangvien/${tenKhongDau}.jpg"
@@ -1048,6 +1051,7 @@ onerror="this.src='avatar.png'"
 <p>
 ${dv.chucVuDang || "Đảng viên"}
 </p>
+
 `
 
 container.appendChild(card)
