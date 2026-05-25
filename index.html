@@ -1482,18 +1482,35 @@ localStorage.getItem(
 "isLoggedIn"
 )
 
+// ẩn tất cả page trước
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display="none"
+})
+
 if(
 isLoggedIn === "true"
 ){
 
+// ẩn login
 document.getElementById(
 "loginPage"
 ).style.display =
 "none"
 
-showPage(
+// hiện home
+document.getElementById(
 "homePage"
-)
+).style.display =
+"block"
+
+// reset history
+pageHistory = [
+"homePage"
+]
+
+updateBackButton()
 
 }else{
 
@@ -1506,6 +1523,16 @@ document.getElementById(
 
 }
 )
+
+function logout(){
+
+localStorage.removeItem(
+"isLoggedIn"
+)
+
+location.reload()
+
+}
 </script>
 
 </body>
