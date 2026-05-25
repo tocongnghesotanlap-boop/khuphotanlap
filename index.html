@@ -563,7 +563,7 @@ class="page"
 type="text"
 id="searchDangVien"
 placeholder="🔍 Tìm đảng viên..."
-oninput="renderDanhSachDangVien()"
+onkeyup="renderDanhSachDangVien()"
 style="
 width:100%;
 padding:16px;
@@ -827,9 +827,11 @@ dangVienCsv
 const csv =
 await res.text()
 
-const rows =
-csv.split("\n")
-.filter(row => row.trim() !== "")
+const rows = csv
+.split("\n")
+.slice(1)
+.map(row => row.trim())
+.filter(row => row !== "")
 
 rows.forEach(row=>{
 
@@ -1030,12 +1032,12 @@ card.className =
 
 card.innerHTML = `
 
-<img
-class="dangvien-avatar"
 src="images/dangvien/${
-dv.hoTen
+(dv.hoTen || "")
 .normalize("NFD")
 .replace(/[\u0300-\u036f]/g,"")
+.replace(/đ/g,"d")
+.replace(/Đ/g,"D")
 .replace(/\s+/g," ")
 .trim()
 }.jpg"
