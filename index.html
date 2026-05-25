@@ -1379,10 +1379,14 @@ document.getElementById(
 pageId
 )
 
+if(page){
 page.style.display =
 "block"
+}
 
 if(
+pageHistory.length === 0
+||
 pageHistory[
 pageHistory.length - 1
 ] !== pageId
@@ -1411,6 +1415,42 @@ btn.style.display =
 pageHistory.length > 1
 ? "block"
 : "none"
+
+}
+  function goBack(){
+
+if(
+pageHistory.length > 1
+){
+
+pageHistory.pop()
+
+const prevPage =
+pageHistory[
+pageHistory.length - 1
+]
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display =
+"none"
+})
+
+document
+.getElementById(
+prevPage
+).style.display =
+"block"
+
+window.scrollTo(
+0,
+0
+)
+
+}
+
+updateBackButton()
 
 }
   function renderDanhSachDangVien(){
