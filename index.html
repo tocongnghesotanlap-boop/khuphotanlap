@@ -701,3 +701,561 @@ class="info-value">
 </div>
 
 </div>
+<!-- DOI TUONG PAGE -->
+
+<div
+id="doiTuongPage"
+class="page"
+>
+
+<div class="topbar">
+<h1>ĐỐI TƯỢNG</h1>
+<p>Quản lý địa bàn</p>
+</div>
+
+<div class="grid">
+
+<div
+class="big-card"
+onclick="openLoaiDoiTuong('Ma túy')"
+>
+🚨 Ma túy
+</div>
+
+<div
+class="big-card"
+onclick="openLoaiDoiTuong('Hình sự')"
+>
+⚖️ Hình sự
+</div>
+
+<div
+class="big-card"
+onclick="openLoaiDoiTuong('Kinh tế')"
+>
+💰 Kinh tế
+</div>
+
+<div
+class="big-card"
+onclick="openLoaiDoiTuong('Chính trị')"
+>
+🏛️ Chính trị
+</div>
+
+</div>
+
+</div>
+
+<!-- DANH SACH DOI TUONG -->
+
+<div
+id="danhSachDoiTuongPage"
+class="page"
+>
+
+<div class="topbar">
+<h1 id="tenLoaiDoiTuong">
+ĐỐI TƯỢNG
+</h1>
+
+<p>Danh sách quản lý</p>
+</div>
+
+<div
+id="doiTuongContainer"
+class="grid"
+></div>
+
+</div>
+
+<!-- CHI TIET DOI TUONG -->
+
+<div
+id="doiTuongDetailPage"
+class="page"
+>
+
+<div class="topbar">
+<h1>THÔNG TIN ĐỐI TƯỢNG</h1>
+<p>Quản lý địa bàn</p>
+</div>
+
+<div class="detail-card">
+
+<div style="text-align:center;">
+
+<img
+id="dtAvatar"
+class="dangvien-avatar"
+src="avatar.png"
+style="
+width:140px;
+height:140px;
+"
+/>
+
+<h2 id="dtHoTen"></h2>
+
+<p
+id="dtLoai"
+style="
+font-size:18px;
+font-weight:bold;
+color:#b91c1c;
+margin-top:8px;
+"
+></p>
+
+</div>
+
+<div class="detail-grid">
+
+<div class="info-card">
+<div class="info-title">
+🆔 CCCD
+</div>
+<div
+id="dtCCCD"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+🏠 Địa chỉ
+</div>
+<div
+id="dtDiaChi"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+🏡 Nơi thường trú
+</div>
+<div
+id="dtNoiThuongTru"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+📞 Điện thoại
+</div>
+<div
+id="dtPhone"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+👮 Quản lý
+</div>
+<div
+id="dtQuanLy"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+📌 Ghi chú
+</div>
+<div
+id="dtGhiChu"
+class="info-value">
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div
+class="footer-item"
+onclick="goHome()"
+>
+<div>🏠</div>
+<span>Home</span>
+</div>
+
+<div class="footer-item">
+<div>🔍</div>
+<span>Tìm kiếm</span>
+</div>
+
+<div class="footer-item">
+<div>📊</div>
+<span>Thống kê</span>
+</div>
+
+<div
+class="footer-item"
+onclick="logout()"
+>
+<div>👤</div>
+<span>Đăng xuất</span>
+</div>
+
+</div>
+
+<script>
+
+const dangVienCsv =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1024784158&single=true&output=csv"
+
+const doiTuongCsv =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1068681591&single=true&output=csv"
+
+let dsDangVien = []
+let dsDoiTuong = []
+let pageHistory = []
+
+function login(){
+
+const user =
+document.getElementById(
+"username"
+).value
+
+const pass =
+document.getElementById(
+"password"
+).value
+
+if(
+user==="admin"
+&&
+pass==="123456"
+){
+
+localStorage.setItem(
+"isLoggedIn",
+"true"
+)
+
+showPage(
+"homePage"
+)
+
+}else{
+
+alert(
+"Sai tài khoản hoặc mật khẩu"
+)
+
+}
+
+}
+
+function logout(){
+
+localStorage.removeItem(
+"isLoggedIn"
+)
+
+location.reload()
+
+}
+
+function showPage(pageId){
+
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.style.display =
+"none"
+})
+
+const page =
+document.getElementById(
+pageId
+)
+
+if(page){
+page.style.display =
+"block"
+}
+
+if(
+pageHistory[
+pageHistory.length -1
+] !== pageId
+){
+pageHistory.push(
+pageId
+)
+}
+
+updateBackButton()
+
+window.scrollTo(
+0,0
+)
+
+}
+
+function goHome(){
+showPage(
+"homePage"
+)
+}
+
+function updateBackButton(){
+
+document.getElementById(
+"backBtn"
+).style.display =
+
+pageHistory.length > 1
+? "block"
+: "none"
+
+}
+
+function goBack(){
+
+if(
+pageHistory.length > 1
+){
+
+pageHistory.pop()
+
+showPage(
+pageHistory[
+pageHistory.length -1
+]
+)
+
+}
+
+}
+
+/* ===== DOI TUONG ===== */
+
+async function openDoiTuong(){
+
+showPage(
+"doiTuongPage"
+)
+
+if(
+dsDoiTuong.length > 0
+){
+return
+}
+
+const res =
+await fetch(
+doiTuongCsv
+)
+
+const csv =
+await res.text()
+
+const rows =
+csv
+.split("\n")
+.slice(1)
+
+rows.forEach(row=>{
+
+const cols =
+row.split(",")
+
+if(!cols[1])
+return
+
+dsDoiTuong.push({
+
+hoTen:
+cols[1]?.trim(),
+
+loai:
+cols[2]?.trim(),
+
+CCCD:
+cols[4]?.trim(),
+
+diaChi:
+cols[5]?.trim(),
+
+soDienThoai:
+cols[6]?.trim(),
+
+quanLy:
+cols[7]?.trim(),
+
+ghiChu:
+cols[8]?.trim(),
+
+anh:
+(cols[9] || "")
+.replace(/"/g,"")
+.trim(),
+
+noiThuongTru:
+cols[10]?.trim()
+
+})
+
+})
+
+}
+
+async function openLoaiDoiTuong(loai){
+
+await openDoiTuong()
+
+showPage(
+"danhSachDoiTuongPage"
+)
+
+document.getElementById(
+"tenLoaiDoiTuong"
+).innerText =
+loai
+
+const container =
+document.getElementById(
+"doiTuongContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDoiTuong.filter(dt=>
+
+(dt.loai || "")
+.toLowerCase()
+.trim()
+===
+loai
+.toLowerCase()
+.trim()
+
+)
+
+filtered.forEach(dt=>{
+
+container.innerHTML += `
+
+<div
+class="dangvien-card"
+onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
+>
+
+<img
+class="dangvien-avatar"
+src="https://khuphotanlap.vercel.app/images/doi-tuong/${dt.anh}"
+onerror="this.src='avatar.png'"
+>
+
+<h3>
+${dt.hoTen}
+</h3>
+
+<p>
+${dt.loai}
+</p>
+
+</div>
+
+`
+
+})
+
+}
+
+function openDoiTuongDetail(dt){
+
+showPage(
+"doiTuongDetailPage"
+)
+
+document.getElementById(
+"dtAvatar"
+).src =
+
+dt.anh
+? `https://khuphotanlap.vercel.app/images/doi-tuong/${dt.anh}`
+: "avatar.png"
+
+document.getElementById(
+"dtHoTen"
+).innerText =
+dt.hoTen || ""
+
+document.getElementById(
+"dtLoai"
+).innerText =
+dt.loai || ""
+
+document.getElementById(
+"dtCCCD"
+).innerText =
+dt.CCCD || ""
+
+document.getElementById(
+"dtDiaChi"
+).innerText =
+dt.diaChi || ""
+
+document.getElementById(
+"dtNoiThuongTru"
+).innerText =
+dt.noiThuongTru || ""
+
+document.getElementById(
+"dtPhone"
+).innerText =
+dt.soDienThoai || ""
+
+document.getElementById(
+"dtQuanLy"
+).innerText =
+dt.quanLy || ""
+
+document.getElementById(
+"dtGhiChu"
+).innerText =
+dt.ghiChu || ""
+
+}
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+const login =
+localStorage.getItem(
+"isLoggedIn"
+)
+
+if(
+login==="true"
+){
+showPage(
+"homePage"
+)
+}else{
+document.getElementById(
+"loginPage"
+).style.display =
+"flex"
+}
+
+}
+)
+
+</script>
