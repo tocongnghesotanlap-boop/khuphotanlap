@@ -1,1849 +1,429 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Khu phố Tân Lập</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<title>Khu phố Tân Lập</title>
+    body {
+      background: #f5f5f5;
+    }
 
-<style>
-#backBtn{
-position:fixed;
-top:15px;
-left:15px;
-z-index:9999;
-background:#0b5d46;
-color:#fff;
-border:none;
-padding:12px 18px;
-border-radius:14px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 4px 12px rgba(0,0,0,.2);
-display:none;
-}
+    #backBtn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 9999;
+      background: #0b5d46;
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      display: none;
+    }
 
-#backBtn:hover{
-background:#0d7458;
-}
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
+    #backBtn:hover {
+      background: #0d7458;
+    }
 
-body{
-  background:#f5f5f5;
-}
+    /* --- LOGIN PAGE --- */
+    #loginPage {
+      min-height: 100vh;
+      background: #0B3D2E;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-/* LOGIN */
+    .container {
+      width: 100%;
+      max-width: 420px;
+    }
 
-#loginPage{
-  min-height:100vh;
-  background:#0B3D2E;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-}
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-.container{
-  width:100%;
-  max-width:420px;
-}
+    .logo {
+      width: 170px;
+      border-radius: 30px;
+    }
 
-.header{
-  text-align:center;
-  margin-bottom:30px;
-}
+    .title {
+      color: #F4C430;
+      font-size: 34px;
+      font-weight: bold;
+      margin-top: 18px;
+    }
 
-.logo{
-  width:170px;
-  border-radius:30px;
-}
+    .subtitle {
+      color: white;
+      margin-top: 8px;
+    }
 
-.title{
-  color:#F4C430;
-  font-size:34px;
-  font-weight:bold;
-  margin-top:18px;
-}
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    }
 
-.subtitle{
-  color:white;
-  margin-top:8px;
-}
+    .input {
+      width: 100%;
+      padding: 18px;
+      border-radius: 18px;
+      border: 2px solid #ddd;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
 
-.card{
-  background:white;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:0 10px 30px rgba(0,0,0,.12);
-}
+    .btn {
+      width: 100%;
+      border: none;
+      background: #F4C430;
+      color: #000;
+      padding: 18px;
+      border-radius: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.input{
-  width:100%;
-  padding:18px;
-  border-radius:18px;
-  border:2px solid #ddd;
-  font-size:16px;
-  margin-bottom:16px;
-}
+    /* --- PAGE STRUCTURE --- */
+    .page {
+      display: none;
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
 
-.btn{
-  width:100%;
-  border:none;
-  background:#F4C430;
-  color:#000;
-  padding:18px;
-  border-radius:18px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .topbar {
+      background: #0B3D2E;
+      padding: 24px;
+      color: white;
+    }
 
-/* PAGE */
+    .topbar h1 {
+      color: #F4C430;
+      font-size: 28px;
+    }
 
-.page{
-  display:none;
-  min-height:100vh;
-  padding-bottom:90px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
 
-.topbar{
-  background:#0B3D2E;
-  padding:24px;
-  color:white;
-}
+    @media(max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 12px;
+      }
+    }
 
-.topbar h1{
-  color:#F4C430;
-  font-size:28px;
-}
+    .card-menu {
+      background: white;
+      border-radius: 24px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  padding:20px;
-}
+    .card-menu:hover {
+      transform: scale(1.02);
+    }
 
-.card-menu{
-  background:white;
-  border-radius:24px;
-  padding:26px;
-  text-align:center;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-  cursor:pointer;
-}
+    .icon {
+      font-size: 40px;
+    }
 
-.card-menu:hover{
-  transform:scale(1.02);
-}
+    .name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0B3D2E;
+    }
 
-.icon{
-  font-size:40px;
-}
+    /* --- INFO CARD & LAYOUTS --- */
+    .detail-card {
+      background: white;
+      border-radius: 28px;
+      padding: 24px;
+      margin: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
 
-.name{
-  margin-top:10px;
-  font-weight:bold;
-  color:#0B3D2E;
-}
+    .info-item {
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
 
-.detail-card{
-  background:white;
-  margin:20px;
-  padding:24px;
-  border-radius:24px;
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
 
-.info-item{
-  margin-bottom:14px;
-}
-/* DANH SACH DANG VIEN */
+    .stat-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 26px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
 
-/* FOOTER */
+    .stat-card div {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
 
-.footer{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:80px;
-background:#fff;
-display:flex;
-justify-content:space-around;
-align-items:center;
-box-shadow:0 -4px 18px rgba(0,0,0,.12);
-z-index:99999;
-border-top-left-radius:24px;
-border-top-right-radius:24px;
-}
+    .stat-number {
+      font-size: 34px;
+      font-weight: bold;
+      color: #0B3D2E;
+      margin-top: 10px;
+    }
 
-.footer-item{
-flex:1;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-height:100%;
-text-align:center;
-font-size:12px;
-color:#666;
-cursor:pointer;
-}
+    .big-card {
+      background: #fff;
+      margin: 20px;
+      padding: 30px;
+      border-radius: 24px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
 
-.footer-item div{
-font-size:24px;
-margin-bottom:4px;
-}
+    .dangvien-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+      cursor: pointer;
+    }
 
-.footer-item span{
-display:block;
-font-size:12px;
-}
-.stat-number{
-font-size:34px;
-font-weight:bold;
-color:#0B3D2E;
-margin-top:10px;
-}
+    .dangvien-avatar {
+      width: 100px;
+      height: 100px;
+      background: #eee;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #0B3D2E;
+      margin-bottom: 12px;
+    }
 
-.big-card{
-background:#fff;
-margin:20px;
-padding:30px;
-border-radius:24px;
-text-align:center;
-font-size:26px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+      width: 100%;
+    }
 
-.dangvien-card{
-background:#fff;
-border-radius:24px;
-padding:20px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+    @media(max-width: 768px) {
+      .detail-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media(max-width: 480px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-.dangvien-avatar{
-width:100px;
-height:100px;
-aspect-ratio:1/1;
-background:#eee;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #0B3D2E;
-margin-bottom:12px;
-}
-  .stats-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:16px;
-padding:20px;
-}
+    .info-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+      border-left: 5px solid #0B3D2E;
+      min-height: 95px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-.stat-card{
-background:#fff;
-border-radius:24px;
-padding:26px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
+    .info-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0B3D2E;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      line-height: 1.3;
+    }
 
-.stat-card div{
-font-size:18px;
-font-weight:bold;
-margin-top:8px;
-}
-  .detail-grid{
-display:grid;
-grid-template-columns:
-repeat(2,minmax(0,1fr));
-gap:14px;
-margin-top:20px;
-width:100%;
-}
+    .info-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: #222;
+      word-break: break-word;
+      line-height: 1.4;
+    }
 
-@media(max-width:768px){
+    /* --- FOOTER NAVIGATION --- */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -4px 18px rgba(0,0,0,.12);
+      z-index: 99999;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
 
-.detail-grid{
-grid-template-columns:
-1fr 1fr;
-}
+    .footer-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+    }
 
-}
+    .footer-item div {
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
 
-.info-card{
-background:#fff;
-border-radius:22px;
-padding:18px;
-box-shadow:
-0 4px 14px
-rgba(0,0,0,.08);
-border-left:
-5px solid #0B3D2E;
-min-height:95px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-}
-.info-title{
-font-size:13px;
-font-weight:600;
-color:#0B3D2E;
-margin-bottom:6px;
-display:flex;
-align-items:center;
-gap:6px;
-line-height:1.3;
-}
+    .footer-item span {
+      display: block;
+      font-size: 12px;
+    }
 
-.info-value{
-font-size:13px;
-font-weight:500;
-color:#222;
-word-break:break-word;
-line-height:1.4;
-}
-.detail-card{
-background:#f5f5f5;
-border-radius:28px;
-padding:20px;
-margin:20px;
-box-shadow:
-0 8px 20px
-rgba(0,0,0,.08);
-}
-</style>
+    .footer-item.active {
+      color: #0B3D2E;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
-<button id="backBtn"
-onclick="goBack()">
-← Trở về
-</button>
-<!-- LOGIN -->
 
-<div id="loginPage">
-
-<div class="container">
-
-<div class="header">
-
-<img src="logo.png" class="logo">
-
-<div class="title">
-KHU PHỐ TÂN LẬP
-</div>
-
-<div class="subtitle">
-Quản lý địa bàn số
-</div>
-
-</div>
-
-<div class="card">
-
-<input
-id="username"
-class="input"
-placeholder="Tài khoản">
-
-<input
-id="password"
-class="input"
-type="password"
-placeholder="Mật khẩu">
-
-<button
-class="btn"
-onclick="login()">
-
-ĐĂNG NHẬP
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- HOME -->
-
-<div id="homePage" class="page">
-
-<div class="topbar">
-
-<h1>KHU PHỐ TÂN LẬP</h1>
-
-<p>Quản lý địa bàn số</p>
-
-</div>
-
-<div class="grid">
-
-<div class="card-menu">
-<div class="icon">📊</div>
-<div class="name">Tổng quan</div>
-</div>
-
-<div
-class="card-menu"
-onclick="openToNDTQ()">
-
-<div class="icon">🏘️</div>
-<div class="name">Tổ NDTQ</div>
-
-</div>
-
-<div class="card-menu">
-<div class="icon">👥</div>
-<div class="name">Nhân khẩu</div>
-</div>
-
-<div class="card-menu">
-<div class="icon">🏪</div>
-<div class="name">Hộ kinh doanh</div>
-</div>
-
-<div
-class="card-menu"
-onclick="openDangVien()">
-
-<div class="icon">
-🧑‍💼
-</div>
-
-<div class="name">
-Đảng viên
-</div>
-
-</div>
-
-<div
-class="card-menu"
-onclick="openDoiTuong()"
->
-<div class="icon">⚠️</div>
-<div class="name">
-Đối tượng
-</div>
-</div>
-
-</div> <!-- grid -->
-</div> <!-- homePage -->
-
-<!-- TO NDTQ -->
-
-<!-- TO NDTQ -->
-
-<div id="toPage" class="page">
-
-<div class="topbar">
-
-<h1>TỔ NDTQ</h1>
-
-<p>13 tổ nhân dân tự quản</p>
-
-</div>
-
-<div id="toContainer" class="grid"></div>
-
-</div>
-
-<!-- DETAIL -->
-
-<div id="detailPage" class="page">
-
-<div class="topbar">
-
-<h1 id="tenTo"></h1>
-
-<p>Thông tin tổ</p>
-
-</div>
-
-<div class="detail-card">
-
-<div class="info-item">
-<b>Diện tích:</b>
-<span id="dienTich"></span>
-</div>
-
-<div class="info-item">
-<b>Số hộ:</b>
-<span id="soHo"></span>
-</div>
-
-<hr><br>
-
-<h3>Tổ trưởng</h3>
-
-<p id="toTruong"></p>
-
-<p>
-📞
-<span id="sdtTruong"></span>
-</p>
-
-<br>
-
-<h3>Tổ phó</h3>
-
-<p id="toPho"></p>
-
-<p>
-📞
-<span id="sdtPho"></span>
-</p>
-
-</div>
-
-</div>
-<!-- DANG VIEN PAGE -->
-
-<div id="dangVienPage" class="page">
-
-<div class="topbar">
-
-<h1>
-CHI BỘ TÂN LẬP
-</h1>
-
-<p>
-Tổng quan đảng viên
-</p>
-
-</div>
-
-<div class="stats-grid">
-
-<div class="stat-card">
-
-👥
-
-<div>
-Tổng Đảng viên
-</div>
-
-<div
-id="tongDangVien"
-class="stat-number">
-
-0
-
-</div>
-
-</div>
-
-<div class="stat-card">
-
-🧑‍💼
-
-<div>
-Ban Chi ủy
-</div>
-
-<div
-id="banChiUy"
-class="stat-number">
-
-0
-
-</div>
-
-</div>
-
-<div class="stat-card">
-
-🟢
-
-<div>
-Đang sinh hoạt
-</div>
-
-<div
-id="dangVienChinhThuc"
-class="stat-number">
-
-0
-
-</div>
-
-</div>
-
-<div class="stat-card">
-
-🟡
-
-<div>
-Miễn sinh hoạt
-</div>
-
-<div
-id="mienSinhHoat"
-class="stat-number">
-
-0
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="big-card"
-onclick="openDanhSachDangVien()">
-
-📋
-
-<h3>
-Xem danh sách đảng viên
-</h3>
-
-</div>
-
-</div>
-  <div
-id="danhSachDangVienPage"
-class="page"
->
-
-<div class="topbar">
-<h1>DANH SÁCH ĐẢNG VIÊN</h1>
-<p>Chi bộ khu phố Tân Lập</p>
-</div>
-
-<div style="padding:20px;">
-
-<input
-type="text"
-id="searchDangVien"
-placeholder="🔍 Tìm đảng viên..."
-style="
-width:100%;
-padding:16px;
-border-radius:18px;
-border:none;
-font-size:16px;
-margin-bottom:20px;
-"
-/>
-
-<div
-id="dangVienContainer"
-class="grid"
-></div>
-
-</div>
-
-</div>
-  <div
-id="dangVienDetailPage"
-class="page"
->
-<div class="topbar">
-<h1>THÔNG TIN ĐẢNG VIÊN</h1>
-<p>Chi bộ khu phố Tân Lập</p>
-</div>
-
-<div class="detail-card">
-
-<div style="text-align:center;">
-
-<img
-id="detailAvatar"
-class="dangvien-avatar"
-src="avatar.png"
-style="
-width:150px;
-height:150px;
-margin-bottom:16px;
-"
-/>
-
-<h2 id="detailHoTen"></h2>
-
-<p
-id="detailChucVu"
-style="
-font-size:20px;
-font-weight:bold;
-color:#0B3D2E;
-margin-bottom:20px;
-"
-></p>
-
-</div>
-
-<div class="detail-grid">
-<div class="info-card">
-<div class="info-title">
-🪪 Số thẻ Đảng
-<div id="detailSoThe"
-class="info-value">
-</div>
-</div>
-</div>
-<div class="info-card">
-<div class="info-title">
-🆔 CCCD
-</div>
-<div id="detailCCCD"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🎂 Ngày sinh
-</div>
-<div id="detailNgaySinh"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-📅 Ngày vào Đảng
-</div>
-<div id="detailNgayVaoDang"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-📅 Chính thức
-</div>
-<div id="detailNgayChinhThuc"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🎓 Chuyên môn
-</div>
-<div id="detailChuyenMon"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🏅 LLCT
-</div>
-<div id="detailLLCT"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🎖️ Huy hiệu Đảng
-</div>
-<div id="detailHuyHieu"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🟡 Miễn sinh hoạt
-</div>
-<div id="detailMienSinhHoat"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-💼 Công việc
-</div>
-<div id="detailCongViec"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-📞 Điện thoại
-</div>
-<div id="detailPhone"
-class="info-value">
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-title">
-🏘️ Tổ NDTQ
-</div>
-<div id="detailTo"
-class="info-value">
-</div>
-</div>
-
-</div> <!-- detail-grid -->
-
-</div> <!-- detail-card -->
-
-</div> <!-- dangVienDetailPage -->
-
-<!-- DOI TUONG PAGE -->
-
-<div
-id="doiTuongPage"
-class="page"
->
-
-<div class="topbar">
-
-<h1>
-ĐỐI TƯỢNG
-</h1>
-
-<p>
-Quản lý đối tượng địa bàn
-</p>
-
-</div>
-
-<div class="grid">
-
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Ma túy')"
->
-<div class="icon">🚨</div>
-<div class="name">
-Ma túy
-</div>
-</div>
-
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Hình sự')"
->
-<div class="icon">⚖️</div>
-<div class="name">
-Hình sự
-</div>
-</div>
-
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Kinh tế')"
->
-<div class="icon">💰</div>
-<div class="name">
-Kinh tế
-</div>
-</div>
-
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Chính trị')"
->
-<div class="icon">🏛️</div>
-<div class="name">
-Chính trị
-</div>
-</div>
-
-</div>
-
-</div>
-  <div
-id="danhSachDoiTuongPage"
-class="page"
->
-
-<div class="topbar">
-
-<h1 id="tenLoaiDoiTuong">
-ĐỐI TƯỢNG
-</h1>
-
-<p>
-Danh sách quản lý
-</p>
-
-</div>
-
-<div
-id="doiTuongContainer"
-class="grid"
->
-
-</div>
-
-</div>
-<!-- FOOTER -->
-
-<div class="footer">
-
-<div
-class="footer-item active"
-onclick="goHome()">
-
-<div>🏠</div>
-<span>Home</span>
-
-</div>
-
-<div class="footer-item">
-<div>🔍</div>
-<span>Tìm kiếm</span>
-</div>
-
-<div class="footer-item">
-<div>📊</div>
-<span>Thống kê</span>
-</div>
-
-<div class="footer-item">
-<div>📄</div>
-<span>Báo cáo</span>
-</div>
-
-<div
-class="footer-item"
-onclick="logout()"
->
-<div>👤</div>
-<span>Đăng xuất</span>
-</div>
-
-</div>
-
-<script>
-let searchTimeout
-
-document
-.getElementById("searchDangVien")
-.addEventListener(
-"input",
-function(){
-
-clearTimeout(searchTimeout)
-
-searchTimeout =
-setTimeout(()=>{
-
-renderDanhSachDangVien()
-   
-},300)
-
-}
-)
-const csvUrl =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
-
-let dsTo = []
- 
-  function login(){
-
-const user =
-document.getElementById(
-"username"
-).value
-
-const pass =
-document.getElementById(
-"password"
-).value
-
-if(
-user==="admin"
-&&
-pass==="123456"
-){
-
-// lưu trạng thái đăng nhập
-localStorage.setItem(
-"isLoggedIn",
-"true"
-)
-
-document.getElementById(
-"loginPage"
-).style.display =
-"none"
-localStorage.setItem(
-"isLoggedIn",
-"true"
-)
-showPage(
-"homePage"
-)
-
-}else{
-
-alert(
-"Sai tài khoản hoặc mật khẩu"
-)
-
-}
-
-}
-
-async function openToNDTQ(){
-
-showPage(
-"toPage"
-)
-
-if(dsTo.length>0){
-return
-}
-
-const res =
-await fetch(csvUrl)
-
-const csv =
-await res.text()
-
-const rows =
-csv.split("\n").slice(1)
-
-rows.forEach(row=>{
-
-const cols =
-row.split(",")
-
-if(cols.length<8)
-return
-
-dsTo.push({
-
-tenTo:
-cols[1]?.trim(),
-
-dienTich:
-cols[2]?.trim(),
-
-soHo:
-cols[3]?.trim(),
-
-toTruong:
-cols[4]?.trim(),
-
-sdtToTruong:
-cols[5]?.trim(),
-
-toPho:
-cols[7]?.trim(),
-
-sdtToPho:
-cols[8]?.trim()
-
-})
-
-})
-
-renderTo()
-
-}
-
-function renderTo(){
-
-const container =
-document.getElementById(
-"toContainer"
-)
-
-container.innerHTML = ""
-
-dsTo.forEach(to=>{
-
-container.innerHTML += `
-
-<div
-class="card-menu"
-onclick='openToDetail(
-${JSON.stringify(to)}
-)'>
-
-<div class="icon">
-🏘️
-</div>
-
-<div class="name">
-${to.tenTo}
-</div>
-
-</div>
-
-`
-
-})
-
-}
-
-function openToDetail(to){
-
-showPage(
-"detailPage"
-)
-
-document.getElementById(
-"tenTo"
-).innerText =
-to.tenTo
-
-document.getElementById(
-"dienTich"
-).innerText =
-to.dienTich
-
-document.getElementById(
-"soHo"
-).innerText =
-to.soHo
-
-document.getElementById(
-"toTruong"
-).innerText =
-to.toTruong
-
-document.getElementById(
-"sdtTruong"
-).innerText =
-to.sdtToTruong
-
-document.getElementById(
-"toPho"
-).innerText =
-to.toPho
-
-document.getElementById(
-"sdtPho"
-).innerText =
-to.sdtToPho
-
-}
-
-function goHome(){
-
-showPage(
-"homePage"
-)
-
-}
-const dangVienCsv =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1024784158&single=true&output=csv"
-const doiTuongCsv =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=1068681591&single=true&output=csv"
-
-let dsDoiTuong = []
-let dsDangVien = []
-
-async function openDangVien(){
-
-showPage(
-"dangVienPage"
-)
-
-if(dsDangVien.length > 0){
-return
-}
-
-const res =
-await fetch(
-dangVienCsv
-)
-
-const csv =
-await res.text()
-
-const rows = csv
-.split("\n")
-.slice(1)
-.map(row => row.trim())
-.filter(row => row !== "")
-
-dsDangVien = []
-
-rows.forEach(row=>{
-
-const cols =
-row.split(",")
-
-const hoTen =
-cols[2]
-?.trim()
-?.replace(/"/g,"")
-
-// bỏ dòng rỗng
-if(!hoTen) return
-
-// bỏ header
-if(
-hoTen.toLowerCase()
-=== "hoten"
-) return
-
-// bỏ dòng lỗi
-if(
-hoTen.length < 3
-) return
-
-// chống trùng tên
-const daTonTai =
-dsDangVien.some(
-dv =>
-dv.hoTen
-?.trim()
-?.toLowerCase()
-===
-hoTen
-.toLowerCase()
-)
-
-if(daTonTai)
-return
-
-dsDangVien.push({
-stt:
-cols[0]?.trim(),
-
-soTheDangVien:
-cols[1]?.trim(),
-
-hoTen:
-cols[2]?.trim(),
-
-soCCCD:
-cols[3]?.trim(),
-
-ngayCap:
-cols[4]?.trim(),
-
-ngaySinh:
-cols[5]?.trim(),
-
-ngayVaoDang:
-cols[6]?.trim(),
-
-ngayChinhThuc:
-cols[7]?.trim(),
-
-vanHoa:
-cols[8]?.trim(),
-
-chuyenMon:
-cols[9]?.trim(),
-
-LLCT:
-cols[10]?.trim(),
-
-huyHieuDang:
-cols[11]?.trim(),
-
-mienSinhHoat:
-cols[12]?.trim(),
-
-congViecHienTai:
-cols[13]?.trim(),
-
-soDienThoai:
-cols[14]?.trim(),
-
-toNDTQ:
-cols[15]?.trim(),
-
-chucVuDang:
-cols[16]?.trim(),
-
-hinhAnh:
-cols[17]?.trim()
-
-})
-
-})
-
-renderThongKeDangVien()
-
-}
-
-function renderThongKeDangVien(){
-
-document.getElementById(
-"tongDangVien"
-).innerText =
-dsDangVien.length
-
-const banChiUy =
-dsDangVien.filter(dv=>
-
-dv.chucVuDang ===
-"Bí thư"
-
-||
-
-dv.chucVuDang ===
-"Phó bí thư"
-
-||
-
-dv.chucVuDang ===
-"Chi ủy viên"
-
-).length
-
-document.getElementById(
-"banChiUy"
-).innerText =
-banChiUy
-
-const mienSinhHoat =
-dsDangVien.filter(dv=>{
-
-const msh =
-String(
-dv.mienSinhHoat || ""
-)
-.trim()
-.toLowerCase()
-
-return (
-msh !== ""
-&&
-msh !== "không"
-&&
-msh !== "khong"
-&&
-msh !== "0"
-)
-
-}).length
-
-document.getElementById(
-"mienSinhHoat"
-).innerText =
-mienSinhHoat
-
-document.getElementById(
-"dangVienChinhThuc"
-).innerText =
-dsDangVien.length
--
-mienSinhHoat
-
-}
-
-function openDanhSachDangVien(){
-
-showPage(
-"danhSachDangVienPage"
-)
-
-if(
-document.getElementById(
-"dangVienContainer"
-).innerHTML === ""
-){
-renderDanhSachDangVien()
-}
-
-}
- let pageHistory = []
-
-function showPage(pageId){
-
-document.getElementById(
-"loginPage"
-).style.display =
-"none"
-
-document
-.querySelectorAll(".page")
-.forEach(page=>{
-page.style.display =
-"none"
-})
-
-const page =
-document.getElementById(
-pageId
-)
-
-if(page){
-page.style.display =
-"block"
-}
-
-if(
-pageHistory.length === 0
-||
-pageHistory[
-pageHistory.length - 1
-] !== pageId
-){
-pageHistory.push(
-pageId
-)
-}
-
-updateBackButton()
-
-window.scrollTo(
-0,
-0
-)
-
-}
-function updateBackButton(){
-
-const btn =
-document.getElementById(
-"backBtn"
-)
-
-btn.style.display =
-pageHistory.length > 1
-? "block"
-: "none"
-
-}
-  function goBack(){
-
-if(
-pageHistory.length > 1
-){
-
-pageHistory.pop()
-
-const prevPage =
-pageHistory[
-pageHistory.length - 1
-]
-
-document
-.querySelectorAll(".page")
-.forEach(page=>{
-page.style.display =
-"none"
-})
-
-document
-.getElementById(
-prevPage
-).style.display =
-"block"
-
-window.scrollTo(
-0,
-0
-)
-
-}
-
-updateBackButton()
-
-}
-  function renderDanhSachDangVien(){
-
-const keyword =
-document
-.getElementById(
-"searchDangVien"
-)
-.value
-.toLowerCase()
-
-const container =
-document.getElementById(
-"dangVienContainer"
-)
-
-container.innerHTML = ""
-
-const filtered =
-dsDangVien.filter(dv=>
-
-(dv.hoTen || "")
-.toLowerCase()
-.includes(keyword)
-
-)
-
-let html = ""
-
-filtered.forEach((dv)=>{
-
-html += `
-
-<div
-class="dangvien-card"
-onclick='openDangVienDetail(${JSON.stringify(dv)})'
->
-
-<img
-class="dangvien-avatar"
-src="images/dangvien/${dv.hinhAnh || 'avatar.png'}"
-onerror="this.onerror=null;this.src='avatar.png'"
->
-
-<h3>${dv.hoTen}</h3>
-
-<p>
-${dv.chucVuDang || "Đảng viên"}
-</p>
-
-</div>
-
-`
-
-})
-
-container.innerHTML = html
-
-}
-  function openDangVienDetail(dv){
-
-showPage(
-"dangVienDetailPage"
-)
-
-document.getElementById(
-"detailAvatar"
-).src =
-`images/dangvien/${
-dv.hinhAnh || "avatar.png"
-}`
-
-document.getElementById(
-"detailHoTen"
-).innerText =
-dv.hoTen || ""
-
-document.getElementById(
-"detailChucVu"
-).innerText =
-dv.chucVuDang || "Đảng viên"
-
-document.getElementById(
-"detailSoThe"
-).innerText =
-dv.soTheDangVien || ""
-
-document.getElementById(
-"detailCCCD"
-).innerText =
-dv.soCCCD || ""
-
-document.getElementById(
-"detailNgaySinh"
-).innerText =
-dv.ngaySinh || ""
-
-document.getElementById(
-"detailNgayVaoDang"
-).innerText =
-dv.ngayVaoDang || ""
-
-document.getElementById(
-"detailNgayChinhThuc"
-).innerText =
-dv.ngayChinhThuc || ""
-
-document.getElementById(
-"detailChuyenMon"
-).innerText =
-dv.chuyenMon || ""
-
-document.getElementById(
-"detailLLCT"
-).innerText =
-dv.LLCT || ""
-
-document.getElementById(
-"detailHuyHieu"
-).innerText =
-dv.huyHieuDang || "Chưa có"
-
-document.getElementById(
-"detailMienSinhHoat"
-).innerText =
-dv.mienSinhHoat || "Không"
-
-document.getElementById(
-"detailCongViec"
-).innerText =
-dv.congViecHienTai || ""
-
-document.getElementById(
-"detailPhone"
-).innerHTML =
-dv.soDienThoai
-? `<a href="tel:${dv.soDienThoai}">
-${dv.soDienThoai}
-</a>`
-: ""
-
-document.getElementById(
-"detailTo"
-).innerText =
-dv.toNDTQ || ""
-
-}
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-const isLoggedIn =
-localStorage.getItem(
-"isLoggedIn"
-)
-
-// reset page
-document
-.querySelectorAll(".page")
-.forEach(page=>{
-page.style.display =
-"none"
-})
-
-if(
-isLoggedIn === "true"
-){
-
-document.getElementById(
-"loginPage"
-).style.display =
-"none"
-
-document.getElementById(
-"homePage"
-).style.display =
-"block"
-
-pageHistory =
-["homePage"]
-
-}else{
-
-document.getElementById(
-"loginPage"
-).style.display =
-"flex"
-
-}
-
-}
-)
-function logout(){
-
-localStorage.removeItem(
-"isLoggedIn"
-)
-
-location.reload()
-
-}
-  
-async function openDoiTuong(){
-
-showPage(
-"doiTuongPage"
-)
-
-if(
-dsDoiTuong.length > 0
-){
-return
-}
-
-try{
-
-const res =
-await fetch(
-doiTuongCsv
-)
-
-const csv =
-await res.text()
-
-const rows =
-csv
-.split("\n")
-.slice(1)
-.map(row=>row.trim())
-.filter(row=>row!=="")
-
-rows.forEach(row=>{
-
-const cols =
-row.split(",")
-
-if(!cols[1])
-return
-
-dsDoiTuong.push({
-
-stt:
-cols[0]?.trim(),
-
-hoTen:
-cols[1]?.trim(),
-
-loai:
-cols[2]?.trim(),
-
-ngaySinh:
-cols[3]?.trim(),
-
-CCCD:
-cols[4]?.trim(),
-
-diaChi:
-cols[5]?.trim(),
-
-soDienThoai:
-cols[6]?.trim(),
-
-quanLy:
-cols[7]?.trim(),
-
-ghiChu:
-cols[8]?.trim(),
-
-anh:
-(cols[9] || "")
-.replace(/"/g,"")
-.trim(),
-
-noiThuongTru:
-cols[10]?.trim()
-
-})
-
-})
-
-}catch(error){
-
-console.error(error)
-
-}
-}
-  async function openLoaiDoiTuong(loai){
-
-if(
-dsDoiTuong.length === 0
-){
-await openDoiTuong()
-}
-
-showPage(
-"danhSachDoiTuongPage"
-)
-
-document.getElementById(
-"tenLoaiDoiTuong"
-).innerText =
-loai.toUpperCase()
-
-const container =
-document.getElementById(
-"doiTuongContainer"
-)
-
-container.innerHTML = ""
-
-const filtered =
-dsDoiTuong.filter(dt =>
-
-(dt.loai || "")
-.trim()
-.toLowerCase()
-===
-loai
-.trim()
-.toLowerCase()
-
-)
-
-if(filtered.length === 0){
-
-container.innerHTML = `
-
-<div style="
-grid-column:1/-1;
-text-align:center;
-padding:40px;
-font-size:18px;
-font-weight:bold;
-color:#777;
-">
-
-Không có dữ liệu
-
-</div>
-
-`
-
-return
-}
-
-let html = ""
-
-filtered.forEach(dt=>{
-
-html += `
-
-<div
-class="dangvien-card"
-onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
->
-
-<img
-class="dangvien-avatar"
-src="https://khuphotanlap.vercel.app/images/doi-tuong/${encodeURIComponent((dt.anh || '').replace(/"/g,'').trim())}"
-onerror="
-console.log('Ảnh lỗi:',this.src);
-this.onerror=null;
-this.src='https://khuphotanlap.vercel.app/avatar.png'
-"
->
-<h3>
-${dt.hoTen || ""}
-</h3>
-<p style="color:red;font-size:12px;">
-${dt.anh}
-</p>
-<p>
-⚠️ ${dt.loai || ""}
-</p>
-
-</div>
-
-`
-
-})
-
-container.innerHTML = html
-
-}
-  function openDoiTuongDetail(dt){
-
-alert(
-dt.hoTen
-)
-
-}
-</script>
-
-</body>
-</html>
+  <button id="backBtn" onclick="goBack()">← Trở về</button>
+
+  <div id="loginPage">
+    <div class="container">
+      <div class="header">
+        <img src="logo.png" class="logo" alt="Logo" onerror="this.style.display='none'">
+        <div class="title">KHU PHỐ TÂN LẬP</div>
+        <div class="subtitle">Quản lý địa bàn số</div>
+      </div>
+      <div class="card">
+        <input id="username" class="input" placeholder="Tài khoản">
+        <input id="password" class="input" type="password" placeholder="Mật khẩu">
+        <button class="btn" onclick="login()">ĐĂNG NHẬP</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="homePage" class="page">
+    <div class="topbar">
+      <h1>KHU PHỐ TÂN LẬP</h1>
+      <p>Quản lý địa bàn số</p>
+    </div>
+    <div class="grid">
+      <div class="card-menu"><div class="icon">📊</div><div class="name">Tổng quan</div></div>
+      <div class="card-menu" onclick="openToNDTQ()"><div class="icon">🏘️</div><div class="name">Tổ NDTQ</div></div>
+      <div class="card-menu"><div class="icon">👥</div><div class="name">Nhân khẩu</div></div>
+      <div class="card-menu"><div class="icon">🏪</div><div class="name">Hộ kinh doanh</div></div>
+      <div class="card-menu" onclick="openDangVien()"><div class="icon">🧑‍💼</div><div class="name">Đảng viên</div></div>
+      <div class="card-menu" onclick="openDoiTuong()"><div class="icon">⚠️</div><div class="name">Đối tượng</div></div>
+    </div>
+  </div>
+
+  <div id="toPage" class="page">
+    <div class="topbar">
+      <h1>TỔ NDTQ</h1>
+      <p>13 tổ nhân dân tự quản</p>
+    </div>
+    <div id="toContainer" class="grid"></div>
+  </div>
+
+  <div id="detailPage" class="page">
+    <div class="topbar">
+      <h1 id="tenTo"></h1>
+      <p>Thông tin tổ</p>
+    </div>
+    <div class="detail-card" style="background: white;">
+      <div class="info-item"><b>Diện tích:</b> <span id="dienTich"></span></div>
+      <div class="info-item"><b>Số hộ:</b> <span id="soHo"></span></div>
+      <hr><br>
+      <h3>Tổ trưởng</h3>
+      <p id="toTruong"></p>
+      <p>📞 <span id="sdtTruong"></span></p>
+      <br>
+      <h3>Tổ phó</h3>
+      <p id="toPho"></p>
+      <p>📞 <span id="sdtPho"></span></p>
+    </div>
+  </div>
+
+  <div id="dangVienPage" class="page">
+    <div class="topbar">
+      <h1>CHI BỘ TÂN LẬP</h1>
+      <p>Tổng quan đảng viên</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">👥<div>Tổng Đảng viên</div><div id="tongDangVien" class="stat-number">0</div></div>
+      <div class="stat-card">🧑‍💼<div>Ban Chi ủy</div><div id="banChiUy" class="stat-number">0</div></div>
+      <div class="stat-card">🟢<div>Đang sinh hoạt</div><div id="dangVienChinhThuc" class="stat-number">0</div></div>
+      <div class="stat-card">🟡<div>Miễn sinh hoạt</div><div id="mienSinhHoat" class="stat-number">0</div></div>
+    </div>
+    <div class="big-card" onclick="openDanhSachDangVien()">📋<h3>Xem danh sách đảng viên</h3></div>
+  </div>
+
+  <div id="danhSachDangVienPage" class="page">
+    <div class="topbar">
+      <h1>DANH SÁCH ĐẢNG VIÊN</h1>
+      <p>Chi bộ khu phố Tân Lập</p>
+    </div>
+    <div style="padding:20px;">
+      <input type="text" id="searchDangVien" placeholder="🔍 Tìm đảng viên..." style="width:100%; padding:16px; border-radius:18px; border:none; font-size:16px; margin-bottom:20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+      <div id="dangVienContainer" class="grid"></div>
+    </div>
+  </div>
+
+  <div id="dangVienDetailPage" class="page">
+    <div class="topbar">
+      <h1>THÔNG TIN ĐẢNG VIÊN</h1>
+      <p>Chi bộ khu phố Tân Lập</p>
+    </div>
+    <div class="detail-card" style="background: white;">
+      <div style="text-align:center;">
+        <img id="detailAvatar" class="dangvien-avatar" src="avatar.png" style="width:150px; height:150px; margin-bottom:16px;" onerror="this.src='avatar.png'" />
+        <h2 id="detailHoTen"></h2>
+        <p id="detailChucVu" style="font-size:20px; font-weight:bold; color:#0B3D2E; margin-bottom:20px;"></p>
+      </div>
+      <div class="detail-grid">
