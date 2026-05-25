@@ -1021,7 +1021,13 @@ dsDangVien.filter(dv=>
 .includes(keyword)
 
 )
-
+const tenKhongDau =
+(dv.hoTen || "")
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/đ/g,"d")
+.replace(/Đ/g,"D")
+.trim()
 filtered.forEach((dv)=>{
 
 const card =
