@@ -632,7 +632,7 @@ class="grid"
 id="dangVienDetailPage"
 class="page"
 >
-
+  </div>
 <div class="topbar">
 <h1>THÔNG TIN ĐẢNG VIÊN</h1>
 <p>Chi bộ khu phố Tân Lập</p>
@@ -668,7 +668,6 @@ margin-bottom:20px;
 </div>
 
 <div class="detail-grid">
-
 <div class="info-card">
 <div class="info-title">
 🪪 Số thẻ Đảng
@@ -677,7 +676,7 @@ margin-bottom:20px;
 class="info-value">
 </div>
 </div>
-
+</div>
 <div class="info-card">
 <div class="info-title">
 🆔 CCCD
@@ -1051,7 +1050,10 @@ rows.forEach(row=>{
 const cols =
 row.split(",")
 
-if(cols.length < 18)
+if(
+!cols[2] ||
+cols[2].trim()===""
+)
 return
 
 dsDangVien.push({
