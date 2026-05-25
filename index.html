@@ -1765,6 +1765,64 @@ ${dt.hoTen || ""}
 container.innerHTML = html
 
 }
+  function openDoiTuongDetail(dt){
+
+showPage(
+"doiTuongDetailPage"
+)
+
+document.getElementById(
+"dtAvatar"
+).src =
+`images/doituong/${
+dt.anh || "avatar.png"
+}`
+
+document.getElementById(
+"dtHoTen"
+).innerText =
+dt.hoTen || ""
+
+document.getElementById(
+"dtLoai"
+).innerText =
+dt.loai || ""
+
+document.getElementById(
+"dtCCCD"
+).innerText =
+dt.CCCD || ""
+
+document.getElementById(
+"dtDiaChi"
+).innerText =
+dt.diaChi || ""
+
+document.getElementById(
+"dtNoiThuongTru"
+).innerText =
+dt.noiThuongTru || ""
+
+document.getElementById(
+"dtPhone"
+).innerHTML =
+dt.soDienThoai
+? `<a href="tel:${dt.soDienThoai}">
+${dt.soDienThoai}
+</a>`
+: ""
+
+document.getElementById(
+"dtQuanLy"
+).innerText =
+dt.quanLy || ""
+
+document.getElementById(
+"dtGhiChu"
+).innerText =
+dt.ghiChu || ""
+
+}
 </script>
 
 </body>
