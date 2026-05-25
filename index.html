@@ -1808,7 +1808,7 @@ onclick='openDoiTuongDetail(${JSON.stringify(dt)})'
 
 <img
 class="dangvien-avatar"
-src="images/doituong/${dt.anh || "avatar.png"}"
+src="${dt.anh ? `images/doituong/${dt.anh.trim()}` : 'avatar.png'}"
 onerror="this.onerror=null;this.src='avatar.png'"
 >
 
