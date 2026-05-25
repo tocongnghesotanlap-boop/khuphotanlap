@@ -1031,27 +1031,17 @@ card.className =
 "dangvien-card"
 
 card.innerHTML = `
-
-src="images/dangvien/${
-(dv.hoTen || "")
-.normalize("NFD")
-.replace(/[\u0300-\u036f]/g,"")
-.replace(/đ/g,"d")
-.replace(/Đ/g,"D")
-.replace(/\s+/g," ")
-.trim()
-}.jpg"
+<img
+class="dangvien-avatar"
+src="images/dangvien/${tenKhongDau}.jpg"
 onerror="this.src='avatar.png'"
 >
 
-<h3>
-${dv.hoTen}
-</h3>
+<h3>${dv.hoTen}</h3>
 
 <p>
-${dv.chucVuDang || 'Đảng viên'}
+${dv.chucVuDang || "Đảng viên"}
 </p>
-
 `
 
 container.appendChild(card)
