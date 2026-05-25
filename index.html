@@ -1736,7 +1736,13 @@ console.error(error)
 
 }
 }
-  function openLoaiDoiTuong(loai){
+  async function openLoaiDoiTuong(loai){
+
+if(
+dsDoiTuong.length === 0
+){
+await openDoiTuong()
+}
 
 showPage(
 "danhSachDoiTuongPage"
@@ -1787,7 +1793,6 @@ Không có dữ liệu
 `
 
 return
-
 }
 
 let html = ""
@@ -1822,6 +1827,13 @@ ${dt.hoTen || ""}
 })
 
 container.innerHTML = html
+
+}
+  function openDoiTuongDetail(dt){
+
+alert(
+dt.hoTen
+)
 
 }
 </script>
