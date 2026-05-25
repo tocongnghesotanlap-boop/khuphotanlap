@@ -263,6 +263,51 @@ font-size:18px;
 font-weight:bold;
 margin-top:8px;
 }
+  .detail-grid{
+display:grid;
+grid-template-columns:
+1fr 1fr;
+gap:12px;
+margin-top:20px;
+}
+
+.info-card{
+background:#fff;
+border-radius:20px;
+padding:16px;
+box-shadow:
+0 4px 12px
+rgba(0,0,0,.12);
+border-left:
+5px solid #0B3D2E;
+}
+
+.info-title{
+font-size:15px;
+font-weight:700;
+color:#0B3D2E;
+margin-bottom:8px;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.info-value{
+font-size:17px;
+font-weight:600;
+color:#222;
+word-break:break-word;
+}
+
+.detail-card{
+background:#f5f5f5;
+border-radius:28px;
+padding:20px;
+margin:20px;
+box-shadow:
+0 8px 20px
+rgba(0,0,0,.08);
+}
 </style>
 </head>
 
@@ -622,93 +667,117 @@ margin-bottom:20px;
 
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="detail-grid">
+
+<div class="info-card">
+<div class="info-title">
 🪪 Số thẻ Đảng
 </div>
-<div id="detailSoThe"></div>
+<div id="detailSoThe"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🆔 CCCD
 </div>
-<div id="detailCCCD"></div>
+<div id="detailCCCD"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🎂 Ngày sinh
 </div>
-<div id="detailNgaySinh"></div>
+<div id="detailNgaySinh"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 📅 Ngày vào Đảng
 </div>
-<div id="detailNgayVaoDang"></div>
+<div id="detailNgayVaoDang"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 📅 Chính thức
 </div>
-<div id="detailNgayChinhThuc"></div>
+<div id="detailNgayChinhThuc"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🎓 Chuyên môn
 </div>
-<div id="detailChuyenMon"></div>
+<div id="detailChuyenMon"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🏅 LLCT
 </div>
-<div id="detailLLCT"></div>
+<div id="detailLLCT"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🎖️ Huy hiệu Đảng
 </div>
-<div id="detailHuyHieu"></div>
+<div id="detailHuyHieu"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🟡 Miễn sinh hoạt
 </div>
-<div id="detailMienSinhHoat"></div>
+<div id="detailMienSinhHoat"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 💼 Công việc
 </div>
-<div id="detailCongViec"></div>
+<div id="detailCongViec"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 📞 Điện thoại
 </div>
-<div id="detailPhone"></div>
+<div id="detailPhone"
+class="info-value">
+</div>
 </div>
 
-<div class="info-row">
-<div class="info-label">
+<div class="info-card">
+<div class="info-title">
 🏘️ Tổ NDTQ
 </div>
-<div id="detailTo"></div>
+<div id="detailTo"
+class="info-value">
+</div>
 </div>
 
-</div>
-</div>
-<!-- FOOTER -->
+</div><!-- FOOTER -->
 
 <div class="footer">
 
