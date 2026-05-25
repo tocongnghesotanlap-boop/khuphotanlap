@@ -679,42 +679,7 @@ searchTimeout =
 setTimeout(()=>{
 
 renderDanhSachDangVien()
-   function openDangVienDetail(dv){
-
-showPage(
-"dangVienDetailPage"
-)
-
-document.getElementById(
-"detailHoTen"
-).innerText =
-dv.hoTen || ""
-
-document.getElementById(
-"detailChucVu"
-).innerText =
-dv.chucVuDang || "Đảng viên"
-
-document.getElementById(
-"detailHuyHieu"
-).innerText =
-dv.huyHieuDang || "Chưa có"
-
-document.getElementById(
-"detailMienSinhHoat"
-).innerText =
-dv.mienSinhHoat || "Không"
-
-document.getElementById(
-"detailAvatar"
-).src =
-`images/dangvien/${
-dv.hinhAnh || "avatar.png"
-}`
-
-}
-
-
+   
 },300)
 
 }
@@ -1155,6 +1120,40 @@ ${dv.chucVuDang || "Đảng viên"}
 })
 
 container.innerHTML = html
+
+}
+  function openDangVienDetail(dv){
+
+showPage(
+"dangVienDetailPage"
+)
+
+document.getElementById(
+"detailHoTen"
+).innerText =
+dv.hoTen || ""
+
+document.getElementById(
+"detailChucVu"
+).innerText =
+dv.chucVuDang || "Đảng viên"
+
+document.getElementById(
+"detailHuyHieu"
+).innerText =
+dv.huyHieuDang || "Chưa có"
+
+document.getElementById(
+"detailMienSinhHoat"
+).innerText =
+dv.mienSinhHoat || "Không"
+
+document.getElementById(
+"detailAvatar"
+).src =
+`images/dangvien/${
+dv.hinhAnh || "avatar.png"
+}`
 
 }
 </script>
