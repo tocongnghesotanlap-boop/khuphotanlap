@@ -803,88 +803,100 @@ class="info-value">
 <!-- DOI TUONG PAGE -->
 
 <div
-id="doiTuongPage"
+id="doiTuongDetailPage"
 class="page"
 >
 
 <div class="topbar">
+<h1>THÔNG TIN ĐỐI TƯỢNG</h1>
+<p>Quản lý địa bàn</p>
+</div>
 
-<h1>
-ĐỐI TƯỢNG
-</h1>
+<div class="detail-card">
 
-<p>
-Quản lý đối tượng địa bàn
-</p>
+<div style="text-align:center;">
+
+<img
+id="dtAvatar"
+class="dangvien-avatar"
+src="avatar.png"
+style="
+width:140px;
+height:140px;
+"
+/>
+
+<h2 id="dtHoTen"></h2>
+
+<p
+id="dtLoai"
+style="
+font-size:18px;
+font-weight:bold;
+color:#b91c1c;
+margin-top:8px;
+"
+></p>
 
 </div>
 
-<div class="grid">
+<div class="detail-grid">
 
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Ma túy')"
->
-<div class="icon">🚨</div>
-<div class="name">
-Ma túy
+<div class="info-card">
+<div class="info-title">
+🆔 CCCD
+</div>
+<div id="dtCCCD"
+class="info-value">
 </div>
 </div>
 
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Hình sự')"
->
-<div class="icon">⚖️</div>
-<div class="name">
-Hình sự
+<div class="info-card">
+<div class="info-title">
+🏠 Địa chỉ
+</div>
+<div id="dtDiaChi"
+class="info-value">
 </div>
 </div>
 
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Kinh tế')"
->
-<div class="icon">💰</div>
-<div class="name">
-Kinh tế
+<div class="info-card">
+<div class="info-title">
+🏡 Nơi thường trú
+</div>
+<div id="dtNoiThuongTru"
+class="info-value">
 </div>
 </div>
 
-<div
-class="card-menu"
-onclick="openLoaiDoiTuong('Chính trị')"
->
-<div class="icon">🏛️</div>
-<div class="name">
-Chính trị
+<div class="info-card">
+<div class="info-title">
+📞 Điện thoại
+</div>
+<div id="dtPhone"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+👮 Quản lý
+</div>
+<div id="dtQuanLy"
+class="info-value">
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-title">
+📌 Ghi chú
+</div>
+<div id="dtGhiChu"
+class="info-value">
 </div>
 </div>
 
 </div>
-
-</div>
-  <div
-id="danhSachDoiTuongPage"
-class="page"
->
-
-<div class="topbar">
-
-<h1 id="tenLoaiDoiTuong">
-ĐỐI TƯỢNG
-</h1>
-
-<p>
-Danh sách quản lý
-</p>
-
-</div>
-
-<div
-id="doiTuongContainer"
-class="grid"
->
 
 </div>
 
@@ -1847,9 +1859,76 @@ container.innerHTML = html
 }
   function openDoiTuongDetail(dt){
 
-alert(
-dt.hoTen
+showPage(
+"doiTuongDetailPage"
 )
+
+const tenAnh =
+(dt.anh || "")
+.replace(/"/g,"")
+.trim()
+
+document.getElementById(
+"dtAvatar"
+).src =
+tenAnh
+? `images/doi-tuong/${tenAnh}`
+: "avatar.png"
+
+document.getElementById(
+"dtAvatar"
+).onerror =
+function(){
+this.src =
+"avatar.png"
+}
+
+document.getElementById(
+"dtHoTen"
+).innerText =
+dt.hoTen || ""
+
+document.getElementById(
+"dtLoai"
+).innerText =
+dt.loai || ""
+
+document.getElementById(
+"dtCCCD"
+).innerText =
+dt.CCCD || "Chưa cập nhật"
+
+document.getElementById(
+"dtDiaChi"
+).innerText =
+dt.diaChi || "Chưa cập nhật"
+
+document.getElementById(
+"dtNoiThuongTru"
+).innerText =
+dt.noiThuongTru
+|| "Chưa cập nhật"
+
+document.getElementById(
+"dtPhone"
+).innerHTML =
+dt.soDienThoai
+? `<a href="tel:${dt.soDienThoai}">
+${dt.soDienThoai}
+</a>`
+: "Chưa cập nhật"
+
+document.getElementById(
+"dtQuanLy"
+).innerText =
+dt.quanLy
+|| "Chưa cập nhật"
+
+document.getElementById(
+"dtGhiChu"
+).innerText =
+dt.ghiChu
+|| "Không có"
 
 }
 </script>
