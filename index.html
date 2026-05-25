@@ -37,7 +37,7 @@
       background: #0d7458;
     }
 
-    /* LOGIN PAGE */
+    /* --- LOGIN PAGE --- */
     #loginPage {
       min-height: 100vh;
       background: #0B3D2E;
@@ -102,7 +102,7 @@
       cursor: pointer;
     }
 
-    /* GENERAL PAGE STRUCTURE */
+    /* --- GENERAL PAGE STRUCTURE --- */
     .page {
       display: none;
       min-height: 100vh;
@@ -159,7 +159,7 @@
       color: #0B3D2E;
     }
 
-    /* DETAILS & STATS */
+    /* --- DETAILS & STATS --- */
     .detail-card {
       background: white;
       border-radius: 28px;
@@ -240,8 +240,59 @@
       width: 100%;
     }
 
+    @media(max-width: 500px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .info-card {
       background: #fff;
       border-radius: 22px;
       padding: 14px;
-      box-
+      box-shadow: 0 4px 14px rgba(0,0,0,.08);
+      border-left: 5px solid #0B3D2E;
+      min-height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .info-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0B3D2E;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .info-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: #222;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    /* --- FOOTER BAR --- */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      box-shadow: 0 -4px 18px rgba(0,0,0,.12);
+      z-index: 99999;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .footer-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content:
