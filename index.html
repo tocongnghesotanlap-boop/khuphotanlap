@@ -880,25 +880,28 @@ Danh sách quản lý
 </p>
 </div> <!-- danhSachDoiTuongPage -->
 
+<!-- FOOTER -->
 <div
-id="doiTuongDetailPage"
+id="danhSachDoiTuongPage"
 class="page"
 >
 
-... code mình gửi ...
+<div class="topbar">
 
-</div>
+<h1 id="tenLoaiDoiTuong">
+ĐỐI TƯỢNG
+</h1>
 
-<!-- FOOTER -->
-<div class="footer">
+<p>
+Danh sách quản lý
+</p>
+
 </div>
 
 <div
 id="doiTuongContainer"
 class="grid"
->
-
-</div>
+></div>
 
 </div>
 <!-- FOOTER -->
@@ -1417,6 +1420,19 @@ window.scrollTo(
 
 }
 function updateBackButton(){
+
+const btn =
+document.getElementById(
+"backBtn"
+)
+
+btn.style.display =
+pageHistory.length > 1
+? "block"
+: "none"
+
+}
+
 function goBack(){
 
 if(
@@ -1452,8 +1468,7 @@ window.scrollTo(
 
 updateBackButton()
 
-}
-const btn =
+}const btn =
 document.getElementById(
 "backBtn"
 )
