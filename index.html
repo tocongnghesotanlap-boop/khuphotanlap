@@ -1470,7 +1470,9 @@ document.getElementById(
 dv.toNDTQ || ""
 
 }
-window.onload = function(){
+document.addEventListener(
+"DOMContentLoaded",
+function(){
 
 const isLoggedIn =
 localStorage.getItem(
@@ -1478,8 +1480,7 @@ localStorage.getItem(
 )
 
 if(
-isLoggedIn ===
-"true"
+isLoggedIn === "true"
 ){
 
 document.getElementById(
@@ -1491,9 +1492,17 @@ showPage(
 "homePage"
 )
 
+}else{
+
+document.getElementById(
+"loginPage"
+).style.display =
+"flex"
+
 }
 
 }
+)
 </script>
 
 </body>
