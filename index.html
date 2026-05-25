@@ -429,13 +429,14 @@ onclick="openDangVien()">
 
 </div>
 
-<div class="card-menu">
+<div
+class="card-menu"
+onclick="openDoiTuong()"
+>
 <div class="icon">⚠️</div>
-<div class="name">Đối tượng</div>
+<div class="name">
+Đối tượng
 </div>
-
-</div>
-
 </div>
 
 <!-- TO NDTQ -->
@@ -794,7 +795,95 @@ class="info-value">
 
 </div> <!-- dangVienDetailPage -->
 
+<!-- DOI TUONG PAGE -->
 
+<div
+id="doiTuongPage"
+class="page"
+>
+
+<div class="topbar">
+
+<h1>
+ĐỐI TƯỢNG
+</h1>
+
+<p>
+Quản lý đối tượng địa bàn
+</p>
+
+</div>
+
+<div class="grid">
+
+<div
+class="card-menu"
+onclick="openLoaiDoiTuong('Ma túy')"
+>
+<div class="icon">🚨</div>
+<div class="name">
+Ma túy
+</div>
+</div>
+
+<div
+class="card-menu"
+onclick="openLoaiDoiTuong('Hình sự')"
+>
+<div class="icon">⚖️</div>
+<div class="name">
+Hình sự
+</div>
+</div>
+
+<div
+class="card-menu"
+onclick="openLoaiDoiTuong('Kinh tế')"
+>
+<div class="icon">💰</div>
+<div class="name">
+Kinh tế
+</div>
+</div>
+
+<div
+class="card-menu"
+onclick="openLoaiDoiTuong('Chính trị')"
+>
+<div class="icon">🏛️</div>
+<div class="name">
+Chính trị
+</div>
+</div>
+
+</div>
+
+</div>
+  <div
+id="danhSachDoiTuongPage"
+class="page"
+>
+
+<div class="topbar">
+
+<h1 id="tenLoaiDoiTuong">
+ĐỐI TƯỢNG
+</h1>
+
+<p>
+Danh sách quản lý
+</p>
+
+</div>
+
+<div
+id="doiTuongContainer"
+class="grid"
+>
+
+</div>
+
+</div>
 <!-- FOOTER -->
 
 <div class="footer">
@@ -1538,6 +1627,81 @@ localStorage.removeItem(
 )
 
 location.reload()
+
+}
+  const dsDoiTuong = [
+
+{
+hoTen:"Nguyễn Văn A",
+loai:"Ma túy",
+diaChi:"Tổ 3"
+},
+
+{
+hoTen:"Trần Văn B",
+loai:"Hình sự",
+diaChi:"Tổ 5"
+},
+
+{
+hoTen:"Lê Văn C",
+loai:"Kinh tế",
+diaChi:"Tổ 7"
+}
+
+]
+
+function openDoiTuong(){
+
+showPage(
+"doiTuongPage"
+)
+
+}
+
+function openLoaiDoiTuong(loai){
+
+showPage(
+"danhSachDoiTuongPage"
+)
+
+document.getElementById(
+"tenLoaiDoiTuong"
+).innerText =
+loai.toUpperCase()
+
+const container =
+document.getElementById(
+"doiTuongContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDoiTuong.filter(
+dt =>
+dt.loai === loai
+)
+
+filtered.forEach(dt=>{
+
+container.innerHTML += `
+
+<div class="dangvien-card">
+
+<h3>
+${dt.hoTen}
+</h3>
+
+<p>
+📍 ${dt.diaChi}
+</p>
+
+</div>
+
+`
+
+})
 
 }
 </script>
