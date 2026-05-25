@@ -1064,18 +1064,91 @@ const rows = csv
 .map(row => row.trim())
 .filter(row => row !== "")
 
-rows.forEach(row=>{
+rrows.forEach(row=>{
 
 const cols =
 row.split(",")
 
+const hoTen =
+cols[2]?.trim()
+
+// bỏ dòng rỗng
+if(!hoTen) return
+
+// bỏ dòng bị lỗi header
 if(
-!cols[2] ||
-cols[2].trim()===""
+hoTen === "hoTen"
+) return
+
+// chống trùng tên
+const daTonTai =
+dsDangVien.some(
+dv =>
+dv.hoTen === hoTen
 )
+
+if(daTonTai)
 return
 
 dsDangVien.push({
+
+stt:
+cols[0]?.trim(),
+
+soTheDangVien:
+cols[1]?.trim(),
+
+hoTen:
+hoTen,
+
+soCCCD:
+cols[3]?.trim(),
+
+ngayCap:
+cols[4]?.trim(),
+
+ngaySinh:
+cols[5]?.trim(),
+
+ngayVaoDang:
+cols[6]?.trim(),
+
+ngayChinhThuc:
+cols[7]?.trim(),
+
+vanHoa:
+cols[8]?.trim(),
+
+chuyenMon:
+cols[9]?.trim(),
+
+LLCT:
+cols[10]?.trim(),
+
+huyHieuDang:
+cols[11]?.trim(),
+
+mienSinhHoat:
+cols[12]?.trim(),
+
+congViecHienTai:
+cols[13]?.trim(),
+
+soDienThoai:
+cols[14]?.trim(),
+
+toNDTQ:
+cols[15]?.trim(),
+
+chucVuDang:
+cols[16]?.trim(),
+
+hinhAnh:
+cols[17]?.trim()
+
+})
+
+})
 
 stt:
 cols[0]?.trim(),
