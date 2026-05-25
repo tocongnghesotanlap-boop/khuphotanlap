@@ -1263,24 +1263,41 @@ renderDanhSachDangVien()
 }
   let pageHistory = []
 
-function showPage(pageId){
+function showPage(
+pageId,
+saveHistory = true
+){
 
+// ẩn login luôn
+document.getElementById(
+"loginPage"
+).style.display =
+"none"
+
+// ẩn tất cả page
 document
 .querySelectorAll(".page")
 .forEach(page=>{
-page.style.display="none"
+page.style.display =
+"none"
 })
 
+// hiện page cần mở
 document
 .getElementById(pageId)
-.style.display="block"
+.style.display =
+"block"
 
+// chỉ lưu history khi cần
 if(
+saveHistory &&
 pageHistory[
 pageHistory.length-1
 ] !== pageId
 ){
-pageHistory.push(pageId)
+pageHistory.push(
+pageId
+)
 }
 
 updateBackButton()
@@ -1494,15 +1511,22 @@ if(
 isLoggedIn === "true"
 ){
 
+showPage(
+"homePage",
+false
+)
+
+pageHistory =
+["homePage"]
+
+}else{
+
 document.getElementById(
 "loginPage"
 ).style.display =
-"none"
+"flex"
 
-showPage(
-"homePage"
-)
-
+}
 }else{
 
 document.getElementById(
