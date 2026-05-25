@@ -583,6 +583,52 @@ class="grid"
 </div>
 
 </div>
+  <div
+id="dangVienDetailPage"
+class="page"
+>
+
+<div class="topbar">
+<h1>THÔNG TIN ĐẢNG VIÊN</h1>
+<p>Chi bộ khu phố Tân Lập</p>
+</div>
+
+<div class="detail-card" style="text-align:center;">
+
+<img
+id="detailAvatar"
+class="dangvien-avatar"
+src="avatar.png"
+style="width:140px;height:140px;"
+>
+
+<h2 id="detailHoTen"></h2>
+
+<p
+id="detailChucVu"
+style="
+font-size:18px;
+color:#0B3D2E;
+font-weight:bold;
+margin:10px 0;
+"
+></p>
+
+<hr style="margin:20px 0">
+
+<div class="info-item">
+<b>🎖️ Huy hiệu Đảng:</b>
+<span id="detailHuyHieu"></span>
+</div>
+
+<div class="info-item">
+<b>🟡 Miễn sinh hoạt:</b>
+<span id="detailMienSinhHoat"></span>
+</div>
+
+</div>
+
+</div>
 <!-- FOOTER -->
 
 <div class="footer">
@@ -642,6 +688,40 @@ const csvUrl =
 "https://docs.google.com/spreadsheets/d/e/2PACX-1vRUglpiQKTQ-LQ6DXE_syygvGf1SHibDS-EhnJKx_UGQ7NwABXrorPEe630bnCuSdp7UQjjaukm3nuy/pub?gid=0&single=true&output=csv"
 
 let dsTo = []
+  function openDangVienDetail(dv){
+
+showPage(
+"dangVienDetailPage"
+)
+
+document.getElementById(
+"detailHoTen"
+).innerText =
+dv.hoTen || ""
+
+document.getElementById(
+"detailChucVu"
+).innerText =
+dv.chucVuDang || "Đảng viên"
+
+document.getElementById(
+"detailHuyHieu"
+).innerText =
+dv.huyHieuDang || "Chưa có"
+
+document.getElementById(
+"detailMienSinhHoat"
+).innerText =
+dv.mienSinhHoat || "Không"
+
+document.getElementById(
+"detailAvatar"
+).src =
+`images/dangvien/${
+dv.hinhAnh || "avatar.png"
+}`
+
+}
 
   function login(){
 
@@ -1050,7 +1130,10 @@ filtered.forEach((dv)=>{
 
 html += `
 
-<div class="dangvien-card">
+<div
+class="dangvien-card"
+onclick='openDangVienDetail(${JSON.stringify(dv)})'
+>
 
 <img
 class="dangvien-avatar"
