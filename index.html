@@ -1613,28 +1613,7 @@ localStorage.removeItem(
 location.reload()
 
 }
-  const dsDoiTuong = [
-
-{
-hoTen:"Nguyễn Văn A",
-loai:"Ma túy",
-diaChi:"Tổ 3"
-},
-
-{
-hoTen:"Trần Văn B",
-loai:"Hình sự",
-diaChi:"Tổ 5"
-},
-
-{
-hoTen:"Lê Văn C",
-loai:"Kinh tế",
-diaChi:"Tổ 7"
-}
-
-]
-
+  
 async function openDoiTuong(){
 
 showPage(
@@ -1646,6 +1625,8 @@ dsDoiTuong.length > 0
 ){
 return
 }
+
+try{
 
 const res =
 await fetch(
@@ -1661,8 +1642,6 @@ csv
 .slice(1)
 .map(row=>row.trim())
 .filter(row=>row!=="")
-
-dsDoiTuong = []
 
 rows.forEach(row=>{
 
@@ -1702,13 +1681,20 @@ ghiChu:
 cols[8]?.trim(),
 
 anh:
-cols[9]?.trim()
+cols[9]?.trim(),
+
 noiThuongTru:
 cols[10]?.trim()
-})
 
 })
 
+})
+
+}catch(error){
+
+console.error(error)
+
+}
 }
 </script>
 
