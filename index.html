@@ -878,7 +878,19 @@ class="page"
 <p>
 Danh sách quản lý
 </p>
+</div> <!-- danhSachDoiTuongPage -->
 
+<div
+id="doiTuongDetailPage"
+class="page"
+>
+
+... code mình gửi ...
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
 </div>
 
 <div
@@ -1613,28 +1625,7 @@ localStorage.removeItem(
 location.reload()
 
 }
-  const dsDoiTuong = [
-
-{
-hoTen:"Nguyễn Văn A",
-loai:"Ma túy",
-diaChi:"Tổ 3"
-},
-
-{
-hoTen:"Trần Văn B",
-loai:"Hình sự",
-diaChi:"Tổ 5"
-},
-
-{
-hoTen:"Lê Văn C",
-loai:"Kinh tế",
-diaChi:"Tổ 7"
-}
-
-]
-
+  
 async function openDoiTuong(){
 
 showPage(
@@ -1702,7 +1693,7 @@ ghiChu:
 cols[8]?.trim(),
 
 anh:
-cols[9]?.trim()
+cols[9]?.trim(),
 noiThuongTru:
 cols[10]?.trim()
 })
