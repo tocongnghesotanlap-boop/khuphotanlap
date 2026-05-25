@@ -1283,6 +1283,345 @@ document.getElementById(
 
 }
 )
+  /* ===== DANG VIEN ===== */
+
+async function openDangVien(){
+
+showPage(
+"dangVienPage"
+)
+
+if(
+dsDangVien.length > 0
+){
+renderThongKeDangVien()
+return
+}
+
+const res =
+await fetch(
+dangVienCsv
+)
+
+const csv =
+await res.text()
+
+const rows =
+csv
+.split("\n")
+.slice(1)
+.map(row=>row.trim())
+.filter(row=>row!=="")
+
+dsDangVien = []
+
+rows.forEach(row=>{
+
+const cols =
+row.split(",")
+
+const hoTen =
+(cols[2] || "")
+.replace(/"/g,"")
+.trim()
+
+if(!hoTen)
+return
+
+const daTonTai =
+dsDangVien.some(
+dv=>
+dv.hoTen
+.toLowerCase()
+===
+hoTen
+.toLowerCase()
+)
+
+if(daTonTai)
+return
+
+dsDangVien.push({
+
+soTheDangVien:
+cols[1]?.trim(),
+
+hoTen:
+cols[2]?.trim(),
+
+soCCCD:
+cols[3]?.trim(),
+
+ngaySinh:
+cols[5]?.trim(),
+
+ngayVaoDang:
+cols[6]?.trim(),
+
+ngayChinhThuc:
+cols[7]?.trim(),
+
+chuyenMon:
+cols[9]?.trim(),
+
+LLCT:
+cols[10]?.trim(),
+
+huyHieuDang:
+cols[11]?.trim(),
+
+mienSinhHoat:
+cols[12]?.trim(),
+
+congViecHienTai:
+cols[13]?.trim(),
+
+soDienThoai:
+cols[14]?.trim(),
+
+toNDTQ:
+cols[15]?.trim(),
+
+chucVuDang:
+cols[16]?.trim(),
+
+hinhAnh:
+(cols[17] || "")
+.replace(/"/g,"")
+.trim()
+
+})
+
+})
+
+renderThongKeDangVien()
+
+}
+
+function renderThongKeDangVien(){
+
+document.getElementById(
+"tongDangVien"
+).innerText =
+dsDangVien.length
+
+const chiUy =
+dsDangVien.filter(dv=>{
+
+const cv =
+(dv.chucVuDang || "")
+.toLowerCase()
+
+return (
+cv.includes("bí thư")
+||
+cv.includes("phó bí thư")
+||
+cv.includes("chi ủy")
+)
+
+}).length
+
+document.getElementById(
+"banChiUy"
+).innerText =
+chiUy
+
+const mien =
+dsDangVien.filter(dv=>{
+
+const msh =
+(dv.mienSinhHoat || "")
+.toLowerCase()
+.trim()
+
+return (
+msh !== ""
+&&
+msh !== "không"
+&&
+msh !== "khong"
+&&
+msh !== "0"
+)
+
+}).length
+
+document.getElementById(
+"mienSinhHoat"
+).innerText =
+mien
+
+document.getElementById(
+"dangVienChinhThuc"
+).innerText =
+dsDangVien.length
+-
+mien
+
+}
+
+function openDanhSachDangVien(){
+
+showPage(
+"danhSachDangVienPage"
+)
+
+renderDanhSachDangVien()
+
+}
+
+function renderDanhSachDangVien(){
+
+const keyword =
+(
+document.getElementById(
+"searchDangVien"
+)?.value || ""
+)
+.toLowerCase()
+
+const container =
+document.getElementById(
+"dangVienContainer"
+)
+
+container.innerHTML = ""
+
+const filtered =
+dsDangVien.filter(dv=>
+
+(dv.hoTen || "")
+.toLowerCase()
+.includes(keyword)
+
+)
+
+filtered.forEach(dv=>{
+
+container.innerHTML += `
+
+<div
+class="dangvien-card"
+onclick='openDangVienDetail(${JSON.stringify(dv)})'
+>
+
+<img
+class="dangvien-avatar"
+src="https://khuphotanlap.vercel.app/images/dangvien/${dv.hinhAnh}"
+onerror="this.src='avatar.png'"
+>
+
+<h3>
+${dv.hoTen}
+</h3>
+
+<p>
+${dv.chucVuDang || "Đảng viên"}
+</p>
+
+</div>
+
+`
+
+})
+
+}
+
+function openDangVienDetail(dv){
+
+showPage(
+"dangVienDetailPage"
+)
+
+document.getElementById(
+"detailAvatar"
+).src =
+
+dv.hinhAnh
+? `https://khuphotanlap.vercel.app/images/dangvien/${dv.hinhAnh}`
+: "avatar.png"
+
+document.getElementById(
+"detailHoTen"
+).innerText =
+dv.hoTen || ""
+
+document.getElementById(
+"detailChucVu"
+).innerText =
+dv.chucVuDang || ""
+
+document.getElementById(
+"detailSoThe"
+).innerText =
+dv.soTheDangVien || ""
+
+document.getElementById(
+"detailCCCD"
+).innerText =
+dv.soCCCD || ""
+
+document.getElementById(
+"detailNgaySinh"
+).innerText =
+dv.ngaySinh || ""
+
+document.getElementById(
+"detailNgayVaoDang"
+).innerText =
+dv.ngayVaoDang || ""
+
+document.getElementById(
+"detailNgayChinhThuc"
+).innerText =
+dv.ngayChinhThuc || ""
+
+document.getElementById(
+"detailChuyenMon"
+).innerText =
+dv.chuyenMon || ""
+
+document.getElementById(
+"detailLLCT"
+).innerText =
+dv.LLCT || ""
+
+document.getElementById(
+"detailHuyHieu"
+).innerText =
+dv.huyHieuDang || ""
+
+document.getElementById(
+"detailMienSinhHoat"
+).innerText =
+dv.mienSinhHoat || "Không"
+
+document.getElementById(
+"detailCongViec"
+).innerText =
+dv.congViecHienTai || ""
+
+document.getElementById(
+"detailPhone"
+).innerText =
+dv.soDienThoai || ""
+
+document.getElementById(
+"detailTo"
+).innerText =
+dv.toNDTQ || ""
+
+}
+
+document
+.getElementById(
+"searchDangVien"
+)
+?.addEventListener(
+"input",
+renderDanhSachDangVien
+)
 </script>
   </body>
 </html>
